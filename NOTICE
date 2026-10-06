@@ -1,0 +1,65 @@
+Ocena zgodności z NIS 2
+Copyright (c) 2026 ITORO (itoro.com.pl)
+Wersja 1.2.0 z 2026-10-06
+
+Kod źródłowy objęty jest licencją GNU Affero General Public License
+w wersji 3 lub nowszej (plik LICENSE). Treść merytoryczna — katalog pytań,
+opisy wymagań i dokumentacja — licencją Creative Commons Uznanie
+autorstwa — Na tych samych warunkach 4.0 (plik LICENSE-TRESC.md).
+
+Poniższe elementy NIE są objęte tymi licencjami.
+
+
+1. TEKSTY AKTÓW PRAWNYCH
+   Katalogi: ustawy/, ocena/ustawy/
+
+   Pliki zawierają urzędowe teksty aktów prawnych państw członkowskich
+   Unii Europejskiej oraz prawa Unii. Akty urzędowe nie są przedmiotem
+   prawa autorskiego (w prawie polskim art. 4 pkt 1 ustawy o prawie
+   autorskim i prawach pokrewnych; podobne wyłączenia obowiązują
+   w pozostałych państwach członkowskich).
+
+   Pliki pochodzą z urzędowych serwisów publikacyjnych. Adres źródłowy
+   każdego z nich i sposób pozyskania podaje ustawy/manifest.tsv.
+   Tam, gdzie państwo publikuje prawo wyłącznie jako aplikację
+   przeglądarkową, plik PDF jest wydrukiem urzędowej strony — manifest
+   to odnotowuje, a wiążący pozostaje tekst w serwisie urzędowym.
+
+   Belgijskie dokumenty CyberFundamentals (ustawy/BE/cyfun-*.pdf) są
+   materiałem Centre for Cybersecurity Belgium i podlegają warunkom
+   wskazanym przez ten organ.
+
+
+2. RAPORTY POGLĄDOWE
+   Katalog: przyklady/
+
+   Pliki PDF przedstawiają raport narzędzia dla fikcyjnego podmiotu.
+   Nazwa spółki, dane finansowe i wszystkie odpowiedzi są wymyślone;
+   żaden z tych dokumentów nie dotyczy rzeczywistego podmiotu ani nie
+   pochodzi z rzeczywistej oceny.
+
+
+3. BIBLIOTEKI DOŁĄCZONE DO NARZĘDZIA
+   Katalog: ocena/vendor/
+
+   Bootstrap (bootstrap.min.css, bootstrap.bundle.min.js)
+     Copyright (c) The Bootstrap Authors — licencja MIT
+
+   Chart.js (chart.umd.min.js)
+     Copyright (c) Chart.js Contributors — licencja MIT
+
+   chartjs-plugin-annotation (chartjs-plugin-annotation.min.js)
+     Copyright (c) chartjs-plugin-annotation Contributors — licencja MIT
+
+   SheetJS Community Edition (xlsx.full.min.js)
+     Copyright (c) SheetJS LLC — licencja Apache-2.0
+
+   Biblioteki dołączono w postaci nienaruszonej, żeby narzędzie działało
+   bez dostępu do sieci i bez zewnętrznych usług.
+
+
+4. ZNAK TOWAROWY
+   ITORO oraz logo ITORO (obrazy/itoro-logo.svg, ocena/obrazy/itoro-logo.svg)
+   pozostają własnością ITORO. Licencje na kod i treść nie obejmują prawa
+   do posługiwania się tym znakiem — kopia narzędzia rozpowszechniana po
+   zmianach nie powinna sugerować, że pochodzi od ITORO.

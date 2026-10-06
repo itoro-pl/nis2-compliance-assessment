@@ -1,0 +1,1210 @@
+/* ==========================================================
+   ITORO — Ocena zgodności z ustawą o KSC (wdrożenie NIS 2)
+   ========================================================== */
+
+/* Kolorystyka ITORO: karmazyn #B72343 z logotypu, na ciemnej neutrali #191619. */
+:root {
+    --marka: #B72343;
+    --marka-ciemna: #8E1A34;
+    --marka-jasna: #fdeef1;
+    --marka-plakietka: #B72343;
+    --neutral-ciemna: #191619;
+    --neutral-srednia: #313131;
+    --wys-navbar: 60px;
+    --szer-panelu: 300px;
+    --szer-tresci: 1180px;
+    --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+    /* Cztery stopnie pisma i nic poza nimi: plakietki i podpisy,
+       tekst pomocniczy, tekst podstawowy, nagłówki i duże liczby.
+       Mniej stopni czyta się spokojniej, a przy 24 językach o różnej
+       długości słów łatwiej utrzymać równe wiersze. */
+    --f-drobny: .75rem;
+    --f-pomocniczy: .875rem;
+    --f-tekst: 1rem;
+    --f-naglowek: 1.5rem;
+    --tlo: #f6f5f6;
+    --karta-obramowanie: rgba(25, 22, 25, .1);
+
+    /* Domyslny tekst pomocniczy Bootstrapa to rgba(33,37,41,.75) — na tle
+       kart daje 4,3:1, czyli ponizej minimum WCAG AA. Tresci opisowej
+       w narzedziu jest duzo, wiec podnosimy kontrast globalnie. */
+    --bs-secondary-color: #5c6168;
+    --bs-secondary-color-rgb: 92, 97, 104;
+
+    /* Kolory oceny. Wartości dobrane tak, żeby tekst w tym kolorze na
+       tle karty dawał co najmniej 4,5:1 (WCAG AA dla tekstu zwykłego).
+       Motyw ciemny ma własne, jaśniejsze — ten sam zapis musi być
+       czytelny na białym i na grafitowym tle. */
+    --w-krytyczny: #c81e1e;
+    --w-wysoki: #a63a08;
+    --w-sredni: #8a5a00;
+    --w-niski: #11603b;
+    --w-info: #0b6478;
+    --w-neutralny: #4b5563;
+    --tekst-przygaszony: #5c6168;
+
+    /* Te same znaczenia, ale jako tło plakietki z białym napisem.
+       Zostają ciemne również w motywie ciemnym — plakietka niesie
+       własne tło, więc nie musi się rozjaśniać razem z resztą. */
+    --w-krytyczny-tlo: #c81e1e;
+    --w-wysoki-tlo: #a63a08;
+    --w-sredni-tlo: #8a5a00;
+    --w-niski-tlo: #11603b;
+}
+
+[data-bs-theme="dark"] {
+    --marka: #ef5a78;
+    --marka-ciemna: #B72343;
+    --marka-jasna: #332026;
+    --marka-plakietka: #B72343;
+    --tlo: #161417;
+    --karta-obramowanie: rgba(226, 220, 226, .22);
+
+    /* Domyslny kontrast Bootstrapa jest za niski przy tak duzej liczbie
+       pytan — podnosimy jasnosc tekstu i tla kart. */
+    --bs-body-bg: #1e1b21;
+    --bs-body-color: #ece9ee;
+    --bs-secondary-color: #b6afba;
+    --bs-secondary-color-rgb: 182, 175, 186;
+
+    --w-krytyczny: #ff8a85;
+    --w-wysoki: #ffa767;
+    --w-sredni: #e8b931;
+    --w-niski: #4ade80;
+    --w-info: #5bc8e0;
+    --w-neutralny: #b6afba;
+    --tekst-przygaszony: #a9a2ad;
+    --bs-tertiary-bg: #272430;
+}
+
+body {
+    font-family: var(--font); background: var(--tlo);
+    overflow-x: hidden; font-size: 16px; line-height: 1.55;
+}
+
+/* ── NAWIGACJA GÓRNA ──
+   Trzy strefy: marka o szerokości panelu bocznego, tytuł narzędzia
+   zaczynający się dokładnie tam, gdzie kolumna treści, oraz nazwa
+   podmiotu z przyciskami. Nazwa dostaje całą wolną przestrzeń — to
+   ona bywa najdłuższa i to ona najbardziej traci na ucięciu. */
+.bg-marka {
+    background: var(--neutral-ciemna) !important;
+    border-bottom: 3px solid var(--marka);
+    min-height: var(--wys-navbar); padding: 0;
+}
+.pasek-gorny {
+    display: flex; align-items: center; gap: 1rem;
+    min-height: calc(var(--wys-navbar) - 3px);
+    width: 100%; padding-right: 1rem;
+}
+.pasek-marka {
+    flex: 0 0 calc(var(--szer-panelu) + 1.5rem - 1rem);
+    display: flex; align-items: center; gap: .9rem;
+    padding-left: 1rem;
+}
+.logo-itoro { height: 30px; width: 102px; display: block; flex-shrink: 0; }
+.link-itoro {
+    font-size: var(--f-pomocniczy); color: rgba(255,255,255,.78); text-decoration: none;
+    letter-spacing: .02em; white-space: nowrap;
+}
+.link-itoro:hover { color: #fff; text-decoration: underline; }
+
+.tytul-narzedzia { flex-shrink: 0; }
+
+/* Nazwa podmiotu w nagłówku panelu — w całości, bez wielokropka. */
+.nazwa-podmiotu {
+    font-size: var(--f-pomocniczy); font-weight: 600; line-height: 1.3;
+    color: var(--bs-body-color); overflow-wrap: anywhere; margin-bottom: .45rem;
+}
+.nazwa-podmiotu:empty { display: none; }
+/* Przyciski dosuwamy do prawej krawędzi — wolne miejsce po nazwie
+   podmiotu zostaje między tytułem a przyciskami. */
+.pasek-przyciski { display: flex; align-items: center; gap: .5rem; flex-shrink: 0; margin-left: auto; }
+.navbar .btn-outline-light { white-space: nowrap; }
+
+@media (max-width: 991px) {
+    .pasek-marka { flex: 0 0 auto; width: auto; }
+    .tytul-narzedzia { display: none; }
+}
+@media (max-width: 767px) {
+    .link-itoro { display: none; }
+}
+/* Pasek górny mieści się w każdym języku: tytuł niemiecki jest prawie
+   dwa razy dłuższy od polskiego, więc progi szerokości w CSS nie
+   wystarczą. ui/app.js (dopasujPasekGorny) mierzy pasek i ustępuje
+   miejsca przyciskom po kolei — najpierw dopisek, potem cały tytuł.
+   Przyciski nigdy nie wychodzą za krawędź ekranu. */
+.pasek-gorny.bez-dopisku .tytul-dopisek { display: none; }
+.pasek-gorny.bez-tytulu .tytul-narzedzia { display: none; }
+
+/* Telefon: przycisk państwa pokazuje sam kod (pełna nazwa w podpowiedzi
+   i w oknie wyboru), a „Moje oceny" są pierwszą pozycją panelu kroków
+   pod przyciskiem menu — w pasku zabrakłoby dla nich miejsca. */
+@media (max-width: 575px) {
+    .pasek-przyciski .wybor-tekst { display: none; }
+    /* .navbar na początku: dalej w arkuszu .navbar .btn-sm ustawia inline-flex */
+    .navbar .pasek-przyciski .btn-moje-oceny { display: none; }
+    .pasek-przyciski { gap: .4rem; }
+}
+
+/* ── UKŁAD ── */
+.uklad { display: flex; padding-top: var(--wys-navbar); min-height: 100vh; }
+
+.panel-boczny {
+    width: var(--szer-panelu); flex: 0 0 var(--szer-panelu);
+    background: var(--bs-body-bg); border-right: 1px solid var(--karta-obramowanie);
+    height: calc(100vh - var(--wys-navbar)); position: sticky; top: var(--wys-navbar);
+    display: flex; flex-direction: column;
+}
+.panel-naglowek { padding: 1rem; border-bottom: 1px solid var(--karta-obramowanie); }
+.panel-stopka { padding: .75rem 1rem; border-top: 1px solid var(--karta-obramowanie); margin-top: auto; }
+.nawigacja-krokow { flex: 1; overflow-y: auto; padding: .5rem; }
+
+.pozycja-kroku {
+    display: flex; align-items: flex-start; gap: .55rem;
+    padding: .5rem .65rem; border-radius: 7px; cursor: pointer;
+    font-size: var(--f-pomocniczy); color: var(--bs-secondary-color); margin-bottom: 1px;
+}
+.pozycja-kroku:hover { background: var(--marka-jasna); }
+.pozycja-kroku.aktywna { background: var(--marka-plakietka); color: #fff; font-weight: 600; }
+.kropka-warstwy { width: 8px; height: 8px; border-radius: 50%; flex: 0 0 8px; margin-top: .45rem; }
+/* Nazwa kroku w panelu: całość, w kolejnych wierszach — nazwy obszarów
+   rozporządzenia mają po kilkanaście słów i urwane nie mówiły, który
+   to obszar. */
+.etykieta-kroku { min-width: 0; line-height: 1.3; padding-top: .1rem; overflow-wrap: anywhere; }
+.kropka-warstwy.przezroczysta { background: transparent; }
+
+.obszar-tresci {
+    flex: 1; min-width: 0; padding: 1.5rem;
+    height: calc(100vh - var(--wys-navbar)); overflow-y: auto;
+}
+
+/* ── KROKI ── */
+.krok { display: none; max-width: var(--szer-tresci); margin: 0 auto; }
+.krok.aktywny { display: block; animation: pojaw .18s ease; }
+@keyframes pojaw { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+.naglowek-kroku { margin-bottom: 1.4rem; }
+
+.card { border: 1px solid var(--karta-obramowanie); box-shadow: 0 1px 2px rgba(15,23,42,.04); }
+.card-header { background: transparent; border-bottom: 1px solid var(--karta-obramowanie); font-weight: 600; }
+
+/* ── EKRAN STARTOWY ── */
+.pusto {
+    border: 1px dashed var(--karta-obramowanie); border-radius: 10px;
+    padding: 2.5rem 1.5rem; text-align: center;
+}
+.karta-oceny { transition: box-shadow .15s, border-color .15s; }
+.karta-oceny:hover { box-shadow: 0 4px 16px rgba(25,22,25,.12); border-color: var(--marka); }
+.nazwa-oceny { font-size: var(--f-tekst); font-weight: 600; line-height: 1.3; word-break: break-word; }
+.opis-oceny { font-size: var(--f-pomocniczy); }
+.miara { display: flex; flex-direction: column; }
+.miara .wartosc { font-size: var(--f-naglowek); font-weight: 700; line-height: 1.1; }
+.miara .etykieta { font-size: var(--f-drobny); color: var(--bs-secondary-color); }
+
+/* ── ROLE ── */
+.karta-roli {
+    display: flex; align-items: flex-start; width: 100%; cursor: pointer;
+    border: 1px solid var(--karta-obramowanie); border-radius: 9px;
+    padding: .7rem .85rem; margin: 0; transition: border-color .15s, background .15s;
+}
+.karta-roli:hover { border-color: var(--marka); }
+.karta-roli.wybrana { border-color: var(--marka); background: var(--marka-jasna); }
+
+/* ── KLASYFIKACJA ── */
+.plakietka-status {
+    color: #fff; padding: .3rem .8rem; border-radius: 20px;
+    font-weight: 600; font-size: var(--f-pomocniczy);
+}
+.plakietka-warstwa {
+    display: inline-block; color: #fff; padding: .15rem .55rem;
+    border-radius: 12px; font-size: var(--f-drobny); font-weight: 600;
+}
+
+/* ── PYTANIA ── */
+.postep-sekcji { display: flex; align-items: center; gap: .75rem; }
+
+.karta-pytania {
+    background: var(--bs-body-bg); border: 1px solid var(--karta-obramowanie);
+    border-left: 4px solid transparent; border-radius: 10px;
+    padding: 1.35rem 1.5rem; margin-bottom: 1.1rem;
+}
+.karta-pytania.wypelnione { border-left-color: #157347; }
+.karta-pytania:focus-within { border-color: var(--marka); }
+
+.numer-pytania {
+    font-size: var(--f-drobny); font-weight: 700; text-transform: uppercase;
+    letter-spacing: .05em; color: var(--bs-secondary-color);
+}
+.tresc-pytania {
+    font-weight: 500; font-size: var(--f-tekst); line-height: 1.5;
+    margin: .4rem 0 .5rem; max-width: 92ch;
+}
+.pomoc-pytania {
+    font-size: var(--f-pomocniczy); line-height: 1.5; color: var(--bs-body-color);
+    background: var(--marka-jasna); border-left: 3px solid var(--marka);
+    /* Ramka pomocy nie ma własnego limitu — box węższy od kolumny
+       wygląda jak ucięty. Miarę wiersza trzyma sama kolumna kroku. */
+    border-radius: 6px; padding: .6rem .8rem; margin-bottom: .65rem;
+}
+.meta-pytania {
+    display: flex; flex-wrap: wrap; gap: .4rem;
+    font-size: var(--f-drobny); color: var(--bs-secondary-color); margin-bottom: .75rem;
+}
+/* Tylko bezposrednie dzieci: wewnatrz odeslania sa wlasne spany (nazwa aktu,
+   tresc, strona) i szare tlo listy przykrywalo im barwe — biale litery
+   nazwy aktu zostawaly na jasnym tle, czyli praktycznie niewidoczne. */
+.meta-pytania > span { background: var(--bs-tertiary-bg); padding: .1rem .45rem; border-radius: 4px; }
+
+.szczegoly-wymogu { margin: .3rem 0 .55rem; font-size: var(--f-pomocniczy); }
+.szczegoly-wymogu summary { cursor: pointer; color: var(--marka-plakietka); font-size: var(--f-drobny); font-weight: 600; }
+[data-bs-theme="dark"] .szczegoly-wymogu summary { color: #f2a3ab; }
+.szczegoly-wymogu > div {
+    margin-top: .45rem; padding: .6rem .75rem; background: var(--bs-tertiary-bg);
+    border-radius: 6px; line-height: 1.5;
+}
+
+.znacznik { font-size: var(--f-drobny); padding: .12rem .45rem; border-radius: 4px; font-weight: 600; white-space: nowrap; }
+.znacznik-termin { background: #fef3c7; color: #92400e; }
+.znacznik-sankcja { background: #fee2e2; color: #991b1b; }
+.znacznik-zarzad { background: #ede9fe; color: #5b21b6; }
+.znacznik-warunkowy { background: #e0f2fe; color: #075985; }
+[data-bs-theme="dark"] .znacznik-termin { background: #422006; color: #fbbf24; }
+[data-bs-theme="dark"] .znacznik-sankcja { background: #450a0a; color: #fca5a5; }
+[data-bs-theme="dark"] .znacznik-zarzad { background: #2e1065; color: #c4b5fd; }
+[data-bs-theme="dark"] .znacznik-warunkowy { background: #082f49; color: #7dd3fc; }
+
+.tekst-uwaga { color: #92400e; }
+[data-bs-theme="dark"] .tekst-uwaga { color: #fbbf24; }
+
+/* ── SKALE ── */
+.skala-ocen { display: flex; flex-wrap: wrap; gap: .5rem; margin: .65rem 0 .4rem; }
+
+.opcja-skali {
+    flex: 1 1 104px; min-width: 104px; display: flex; flex-direction: column; align-items: center;
+    padding: .7rem .4rem; border: 1.5px solid var(--karta-obramowanie); border-radius: 9px;
+    background: var(--bs-body-bg); cursor: pointer; transition: all .12s;
+}
+.opcja-skali:hover { border-color: var(--marka); }
+.opcja-skali.wybrana { background: var(--marka-plakietka); border-color: var(--marka); color: #fff; }
+.opcja-skali .poziom { font-weight: 700; font-size: var(--f-tekst); line-height: 1.15; }
+.opcja-skali .etykieta { font-size: var(--f-drobny); text-align: center; margin-top: .1rem; }
+
+/* Podstawa = szerokość napisu: irlandzkie „Neamhchomhlíonta" to jedno
+   słowo dłuższe niż 130 px i przy stałej podstawie wystawało z przycisku.
+   Za szeroki przycisk przechodzi do następnego wiersza. */
+.opcja-stanu {
+    flex: 1 1 auto; min-width: 130px; padding: .7rem .8rem; font-size: var(--f-tekst); font-weight: 500;
+    border: 1.5px solid var(--karta-obramowanie); border-radius: 9px;
+    background: var(--bs-body-bg); cursor: pointer; transition: all .12s;
+}
+.opcja-stanu:hover { border-color: var(--kolor); }
+.opcja-stanu.wybrana { background: var(--kolor); border-color: var(--kolor); color: #fff; }
+
+.dowody { margin-top: .5rem; }
+.dowody summary { cursor: pointer; font-size: var(--f-drobny); color: var(--bs-secondary-color); }
+
+/* ── WYNIKI ── */
+.kafelek {
+    background: var(--bs-body-bg); border: 1px solid var(--karta-obramowanie);
+    border-radius: 10px; padding: 1rem; text-align: center; height: 100%;
+}
+.kafelek-wartosc { font-size: var(--f-naglowek); font-weight: 700; line-height: 1.1; }
+.kafelek-podpis { font-size: var(--f-drobny); color: var(--bs-secondary-color); }
+.kafelek-etykieta {
+    font-size: var(--f-drobny); text-transform: uppercase; letter-spacing: .05em;
+    color: var(--bs-secondary-color); margin-top: .35rem; font-weight: 600;
+}
+
+.karta-zarzadu { border-left: 4px solid var(--marka); }
+.karta-ryzyka { border-left: 4px solid #dc2626; }
+
+.blok-zarzadu {
+    background: var(--bs-tertiary-bg); border-radius: 9px; padding: .85rem 1rem; height: 100%;
+}
+.blok-zarzadu .etykieta {
+    font-size: var(--f-drobny); text-transform: uppercase; letter-spacing: .05em;
+    color: var(--bs-secondary-color); font-weight: 600;
+}
+.blok-zarzadu .wartosc { font-size: var(--f-naglowek); font-weight: 700; line-height: 1.3; }
+.blok-zarzadu .opis { font-size: var(--f-drobny); color: var(--bs-secondary-color); }
+
+.lista-zwarta { padding-left: 1.15rem; margin-bottom: .5rem; }
+.lista-zwarta li { margin-bottom: .2rem; }
+
+.wzrost { color: #198754; font-weight: 600; }
+.spadek { color: #dc2626; font-weight: 600; }
+/* Wiersz minionego terminu był przygaszany przezroczystością — razem
+   z tekstem bladły plakietki odesłań i kontrast spadał poniżej progu
+   WCAG AA. Teraz gaśnie samo tło i kolor tekstu, oba policzone. */
+.wiersz-minelo { background: var(--bs-tertiary-bg); color: var(--tekst-przygaszony); }
+.wiersz-minelo .text-secondary, .wiersz-minelo .small { color: var(--tekst-przygaszony) !important; }
+
+/* ── NAWIGACJA DOLNA ── */
+.nawigacja-dolna {
+    display: flex; align-items: center; gap: .5rem;
+    max-width: var(--szer-tresci); margin: 1.5rem auto 3rem;
+    padding-top: 1rem; border-top: 1px solid var(--karta-obramowanie);
+}
+
+/* ── RESPONSYWNOŚĆ ── */
+@media (max-width: 991px) {
+    .panel-boczny {
+        position: fixed; left: 0; top: var(--wys-navbar); z-index: 1030;
+        transform: translateX(-100%); transition: transform .2s;
+        box-shadow: 4px 0 16px rgba(15,23,42,.15);
+    }
+    .panel-boczny.otwarty { transform: none; }
+    .obszar-tresci { padding: 1rem; }
+}
+@media (max-width: 575px) {
+    .opcja-skali { flex: 1 1 60px; min-width: 60px; }
+    .opcja-skali .etykieta { display: none; }
+    .kafelek-wartosc { font-size: var(--f-naglowek); }
+}
+
+/* ── WYDRUK A4 ── */
+@media print {
+    @page { size: A4; margin: 14mm 12mm; }
+
+    .navbar, .panel-boczny, .nawigacja-dolna, .pasek-kroku, .d-print-none,
+    .toast-container, .dowody, .szczegoly-wymogu { display: none !important; }
+
+    body, .uklad, .obszar-tresci { background: #fff !important; display: block !important; padding: 0 !important; height: auto !important; overflow: visible !important; }
+    .krok { display: none !important; }
+    .krok[data-krok="wyniki"] { display: block !important; max-width: none; }
+
+    .card { break-inside: avoid; border: 1px solid #cbd5e1 !important; box-shadow: none !important; margin-bottom: 10pt !important; }
+    .card-header { background: #f1f5f9 !important; }
+    .kafelek, .blok-zarzadu { border: 1px solid #cbd5e1 !important; background: #fff !important; }
+    table { break-inside: auto; font-size: 9pt; }
+    tr, .karta-zarzadu > .card-body > .row { break-inside: avoid; }
+    thead { display: table-header-group; }
+    /* Wysokość wykresów liczy ui/dashboard.js z długości etykiet — sztywny
+       limit ściskał je na wydruku i etykiety wchodziły na siebie. */
+    .card-body:has(> canvas) { break-inside: avoid; }
+    a { text-decoration: none; color: inherit; }
+
+    .naglowek-kroku::after {
+        /* Tresc ustawia ui/app.js z napis('app.stopkaDruku') — inaczej
+           wydruk w kazdym panstwie niosl polskie zdanie o ustawie o KSC. */
+        content: var(--stopka-druku, "");
+        display: block; font-size: 8pt; color: #64748b; margin-top: 6pt;
+        border-top: 1px solid #cbd5e1; padding-top: 4pt;
+    }
+}
+
+/* Ramka wyniku z rejestru przedsiębiorców telekomunikacyjnych */
+.ramka-rpt {
+    background: rgba(25, 135, 84, .08);
+    border-left: 3px solid #198754;
+}
+
+/* ── MODUŁY ── */
+.karta-modulu {
+    display: block; width: 100%; cursor: pointer; margin: 0; height: 100%;
+    border: 1px solid var(--karta-obramowanie); border-radius: 10px;
+    padding: .9rem 1rem; transition: border-color .15s, background .15s;
+}
+.karta-modulu:hover { border-color: var(--marka); }
+.karta-modulu.wybrana { border-color: var(--marka); background: var(--marka-jasna); }
+
+.znacznik-zalecany { background: #dcfce7; color: #166534; }
+[data-bs-theme="dark"] .znacznik-zalecany { background: #052e16; color: #86efac; }
+
+.postep-modulu { display: flex; align-items: center; gap: .5rem; }
+
+/* ── PODGLĄD KWOT ── */
+.pole-kwota { font-variant-numeric: tabular-nums; letter-spacing: .02em; }
+.podglad-kwoty {
+    font-size: var(--f-drobny); color: var(--marka); font-weight: 600;
+    margin-top: .25rem; min-height: 0; display: none;
+}
+.podglad-kwoty.widoczny { display: block; }
+[data-bs-theme="dark"] .podglad-kwoty { color: #93b4ff; }
+
+/* ── MIARKOWANIE KARY ── */
+.ramka-miarkowanie {
+    background: var(--bs-tertiary-bg); border-left: 3px solid var(--marka);
+    border-radius: 6px; padding: .75rem .9rem;
+}
+
+.znacznik-szybki { background: var(--marka-plakietka); color: #fff; }
+
+/* ── ZADANIA KIEROWNICTWA ── */
+.karta-kierownictwa { border-left: 4px solid var(--marka); }
+
+.blok-nadzoru {
+    background: var(--bs-tertiary-bg); border-radius: 9px;
+    padding: .8rem .95rem; height: 100%;
+}
+.blok-nadzoru .etykieta {
+    font-size: var(--f-drobny); font-weight: 700; text-transform: uppercase;
+    letter-spacing: .05em; color: var(--marka); margin-bottom: .4rem;
+}
+
+.meta-pytania .zrodlo-pytania {
+    background: var(--marka-jasna); color: var(--marka); font-weight: 600;
+}
+
+/* ── NAGŁÓWEK: tytuł narzędzia i link ── */
+.tytul-narzedzia {
+    font-size: var(--f-naglowek); font-weight: 600; color: #fff;
+    line-height: 1.2; white-space: nowrap;
+}
+@media (max-width: 767px) { .tytul-narzedzia { font-size: var(--f-tekst); } }
+.min-w-0 { min-width: 0; }
+
+/* Tytuł ekranu startowego w tej samej skali co nagłówek narzędzia. */
+.tytul-ekranu { font-size: var(--f-naglowek); font-weight: 700; line-height: 1.2; margin-bottom: .4rem; }
+
+/* „— wdrożenie NIS 2" jest dopiskiem do nazwy ustawy, nie jej częścią:
+   dyrektywa nie wiąże podmiotu, wiąże go ustawa, która ją wdraża.
+   Typografia ma to pokazywać — stąd lżejszy krój i wygaszony kolor. */
+.tytul-dopisek { font-weight: 400; color: var(--bs-secondary-color); white-space: nowrap; }
+/* W pasku górnym tło jest grafitowe — szarość z treści dawała tam 3,3:1. */
+.navbar .tytul-dopisek { color: rgba(255, 255, 255, .75); }
+.podtytul-ekranu {
+    color: var(--bs-body-color); margin-bottom: .35rem; font-size: var(--f-tekst); line-height: 1.55;
+}
+@media (max-width: 575px) { .tytul-ekranu { font-size: var(--f-naglowek); } }
+
+/* ── PASEK PRYWATNOŚCI ── */
+.pasek-prywatnosci {
+    border: 1px solid var(--karta-obramowanie); border-left: 4px solid #198754;
+    border-radius: 9px; padding: .85rem 1.05rem; font-size: var(--f-pomocniczy);
+    background: var(--bs-body-bg); line-height: 1.55;
+}
+
+/* ── WIZYTÓWKA ITORO ── */
+.wizytowka {
+    display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;
+    border: 1px solid var(--karta-obramowanie); border-left: 4px solid var(--marka);
+    border-radius: 10px; padding: 1.1rem 1.25rem; background: var(--bs-body-bg);
+}
+.wizytowka-tresc { flex: 1 1 340px; font-size: var(--f-pomocniczy); line-height: 1.55; }
+.wizytowka-naglowek {
+    font-size: var(--f-drobny); font-weight: 700; text-transform: uppercase;
+    letter-spacing: .07em; color: var(--marka); margin-bottom: .35rem;
+}
+.btn-outline-marka {
+    border: 1.5px solid var(--marka); color: var(--marka); font-weight: 600;
+}
+.btn-outline-marka:hover { background: var(--marka-plakietka); color: #fff; }
+
+/* ── WCZYTANIE SPRAWOZDANIA ── */
+.wczytaj-sf {
+    border: 1px dashed var(--karta-obramowanie); border-radius: 9px;
+    padding: .8rem .95rem; background: var(--bs-tertiary-bg);
+}
+
+/* ── ODESŁANIA DO PRZEPISÓW ──
+   Plakietka ma stałą wysokość: treść nie zawija się (nazwa aktu jest na
+   etykiecie, więc treść jest krótka), a gdy mimo to nie mieści się
+   w kontenerze, kończy się wielokropkiem — pełny tekst w podpowiedzi.
+   Kilka plakietek stoi w kontenerze .odeslania, który zawija je do lewej
+   krawędzi, żeby w kolumnie tabeli tworzyły równy słupek. */
+.odeslania {
+    display: inline-flex; flex-wrap: wrap; align-items: flex-start;
+    gap: .28rem .35rem; max-width: 100%; vertical-align: top;
+}
+/* W komórce tabeli plakietki stoją jedna pod drugą — równy słupek. */
+td .odeslania { display: flex; flex-direction: column; }
+.odeslanie-tekst { align-self: center; }
+td .odeslanie-tekst { align-self: flex-start; }
+.odeslanie {
+    display: inline-flex; align-items: stretch; gap: 0;
+    border: 1px solid var(--karta-obramowanie); border-radius: 5px;
+    overflow: hidden; font-size: var(--f-pomocniczy); line-height: 1.35;
+    background: var(--bs-body-bg); text-decoration: none; max-width: 100%;
+    white-space: nowrap; min-height: 1.55rem; box-sizing: border-box;
+}
+.odeslanie-akt {
+    background: var(--akt, #6b7280); color: #fff; font-weight: 700;
+    padding: 0 .45rem; font-size: var(--f-drobny); white-space: nowrap;
+    display: flex; align-items: center; flex: 0 0 auto;
+}
+/* Treść odesłania mieści się w jednym wierszu wszędzie tam, gdzie jest
+   na to miejsce — wtedy wszystkie plakietki mają tę samą wysokość. Gdy
+   kolumna jest węższa niż plakietka (telefon), treść przechodzi do
+   drugiego wiersza zamiast urywać się wielokropkiem: „art. 76a ust. 1"
+   ucięte do „art. 76a u…" wskazywałoby nie ten przepis. */
+.odeslanie-tresc {
+    padding: .05rem .45rem; color: var(--bs-body-color);
+    display: flex; align-items: center; min-width: 0;
+    white-space: normal; overflow-wrap: anywhere; line-height: 1.3;
+}
+.odeslanie-strona {
+    padding: 0 .4rem; background: var(--bs-tertiary-bg); flex: 0 0 auto;
+    color: var(--bs-secondary-color); font-size: var(--f-drobny); font-weight: 600;
+    border-left: 1px solid var(--karta-obramowanie);
+    display: flex; align-items: center; white-space: nowrap;
+}
+a.odeslanie-link:hover { border-color: var(--akt); }
+a.odeslanie-link:hover .odeslanie-tresc { color: var(--akt); text-decoration: underline; }
+
+/* Odesłania nie powinny mieć tła listy metadanych */
+.meta-pytania .odeslanie { background: var(--bs-body-bg); padding: 0; }
+
+/* ── ZADANIA KIEROWNICTWA: dwie listy, jedna pod drugą ──
+   Wcześniej były to dwie kolumny kart, każda z kolorową ramką,
+   kolorowym znacznikiem i kolorową plakietką stanu. Trzynaście
+   takich pozycji obok siebie dawało ścianę barw. Teraz kolor niesie
+   wyłącznie kropka stanu; hierarchię buduje kolejność i typografia.
+   Kolejność jest treścią: najpierw to, czego kierownik nie zleci. */
+.grupa-zadan { margin-bottom: 2rem; }
+.grupa-zadan:last-of-type { margin-bottom: 1rem; }
+
+.grupa-glowa {
+    display: flex; align-items: baseline; justify-content: space-between;
+    flex-wrap: wrap; gap: .5rem 1rem;
+    padding-bottom: .5rem; border-bottom: 2px solid var(--karta-obramowanie);
+}
+.grupa-osobiste .grupa-glowa { border-bottom-color: var(--marka); }
+
+.grupa-tytul {
+    font-weight: 700; font-size: var(--f-tekst); margin: 0;
+    display: flex; align-items: baseline; gap: .5rem;
+}
+.grupa-liczba {
+    font-size: var(--f-drobny); font-weight: 700; padding: .1rem .5rem; border-radius: 20px;
+    background: var(--bs-tertiary-bg); color: var(--bs-secondary-color);
+}
+.grupa-osobiste .grupa-liczba { background: var(--marka-plakietka); color: #fff; }
+
+.grupa-wstep {
+    font-size: var(--f-pomocniczy); line-height: 1.55; color: var(--bs-secondary-color);
+    margin: .6rem 0 .2rem;
+}
+
+.licznik-zadan {
+    display: flex; align-items: center; flex-wrap: wrap; gap: .15rem .9rem;
+    font-size: var(--f-pomocniczy); color: var(--bs-secondary-color);
+}
+.licznik-pozycja { display: inline-flex; align-items: center; white-space: nowrap; }
+.kropka {
+    width: 9px; height: 9px; border-radius: 50%; display: inline-block;
+    margin-right: .35rem; flex-shrink: 0;
+}
+.kropka.dozrobienia  { background: #dc2626; }
+.kropka.wtoku        { background: #b45309; }
+.kropka.zrobione     { background: #15803d; }
+.kropka.nieokreslony { background: #6b7280; }
+[data-bs-theme="dark"] .kropka.dozrobienia  { background: #f87171; }
+[data-bs-theme="dark"] .kropka.wtoku        { background: #fbbf24; }
+[data-bs-theme="dark"] .kropka.zrobione     { background: #4ade80; }
+[data-bs-theme="dark"] .kropka.nieokreslony { background: #9ca3af; }
+
+/* Wiersze, nie kafelki: rozdziela je włoskowa linia, nie ramka. */
+.lista-zadan { list-style: none; padding: 0; margin: 0; }
+.lista-zadan .zadanie {
+    display: flex; gap: .75rem; align-items: flex-start;
+    padding: .85rem .25rem; border: 0;
+    border-bottom: 1px solid var(--karta-obramowanie);
+    background: transparent; border-radius: 0; margin: 0;
+}
+.lista-zadan .zadanie:last-child { border-bottom: 0; }
+.lista-zadan .zadanie:hover { background: var(--bs-tertiary-bg); border-radius: 8px; }
+.zadanie.stan-zrobione .zadanie-tytul { color: var(--bs-secondary-color); }
+
+/* Jedyny nośnik koloru w wierszu. Stan słowem powtórzony jest niżej,
+   więc czytelność nie zależy od rozróżniania barw. */
+.zadanie-stan {
+    width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: .45rem;
+    background: #6b7280;
+}
+.stan-dozrobienia  > .zadanie-stan { background: #dc2626; }
+.stan-wtoku        > .zadanie-stan { background: #b45309; }
+.stan-zrobione     > .zadanie-stan { background: #15803d; }
+[data-bs-theme="dark"] .zadanie-stan { background: #9ca3af; }
+[data-bs-theme="dark"] .stan-dozrobienia > .zadanie-stan { background: #f87171; }
+[data-bs-theme="dark"] .stan-wtoku       > .zadanie-stan { background: #fbbf24; }
+[data-bs-theme="dark"] .stan-zrobione    > .zadanie-stan { background: #4ade80; }
+
+.zadanie-tresc { min-width: 0; flex: 1; }
+.zadanie-glowa { display: flex; align-items: baseline; flex-wrap: wrap; gap: .4rem; }
+.zadanie-numer {
+    font-variant-numeric: tabular-nums; font-weight: 700;
+    font-size: var(--f-pomocniczy); color: var(--bs-secondary-color);
+}
+.zadanie-tytul { font-weight: 600; font-size: var(--f-tekst); line-height: 1.4; }
+.zadanie-termin {
+    font-size: var(--f-drobny); font-weight: 600; color: var(--bs-secondary-color);
+    border: 1px solid var(--karta-obramowanie); border-radius: 4px; padding: .05rem .4rem;
+}
+.zadanie-opis {
+    font-size: var(--f-pomocniczy); color: var(--bs-body-color); margin-top: .3rem; line-height: 1.55;
+}
+.zadanie-meta {
+    display: flex; flex-wrap: wrap; gap: .35rem .75rem; align-items: center;
+    margin-top: .4rem; font-size: var(--f-drobny); color: var(--bs-secondary-color);
+}
+.zadanie-etykieta-stanu { font-weight: 600; }
+
+/* ── PRZYCISK MIGAWKI ── */
+.btn-migawka {
+    display: flex; flex-direction: column; align-items: center; gap: .1rem;
+    background: var(--marka-plakietka); color: #fff; border: 0; border-radius: 9px;
+    padding: .65rem .7rem; font-weight: 600; line-height: 1.25;
+    transition: background .15s, transform .1s;
+}
+.btn-migawka:hover { background: var(--marka-ciemna); color: #fff; }
+.btn-migawka:active { transform: translateY(1px); }
+.btn-migawka-tytul { font-size: var(--f-tekst); }
+/* Bez przezroczystości: przygaszenie bieli mieszało kolor z tłem i psuło
+   pomiar kontrastu. Jasny róż na karmazynie daje 4,8:1. */
+.btn-migawka-opis { font-size: var(--f-drobny); font-weight: 400; color: #fce3e9; text-align: center; }
+
+/* Odesłanie prowadzące do innego aktu niż wskazany na plakietce
+   (przepis dodany ustawą nowelizującą). */
+.odeslanie-przekierowane .odeslanie-strona {
+    background: var(--marka-jasna); color: var(--marka); font-weight: 700;
+}
+
+/* ── WYBÓR ŹRÓDŁA DANYCH ── */
+.zrodlo {
+    display: flex; flex-direction: column; height: 100%;
+    border: 1px solid var(--karta-obramowanie); border-radius: 11px;
+    padding: 1.1rem 1.2rem; background: var(--bs-body-bg);
+}
+.zrodlo-pelne { border-top: 4px solid var(--marka); }
+.zrodlo-czesciowe { border-top: 4px solid #64748b; }
+
+.zrodlo-plakietka {
+    align-self: flex-start; font-size: var(--f-drobny); font-weight: 700;
+    text-transform: uppercase; letter-spacing: .06em;
+    padding: .15rem .5rem; border-radius: 4px; margin-bottom: .5rem;
+}
+.zrodlo-pelne .zrodlo-plakietka { background: var(--marka-plakietka); color: #fff; }
+.zrodlo-czesciowe .zrodlo-plakietka { background: var(--bs-tertiary-bg); color: var(--bs-secondary-color); }
+
+.zrodlo-tytul { font-size: var(--f-tekst); font-weight: 600; margin-bottom: .4rem; }
+.zrodlo-opis { font-size: var(--f-pomocniczy); line-height: 1.55; margin-bottom: .6rem; }
+
+.zrodlo-lista { list-style: none; padding: 0; margin: 0 0 .9rem; font-size: var(--f-pomocniczy); }
+.zrodlo-lista li { padding-left: 1.4rem; position: relative; margin-bottom: .25rem; line-height: 1.45; }
+.zrodlo-lista li::before {
+    content: "✓"; position: absolute; left: 0; top: 0;
+    color: #198754; font-weight: 700;
+}
+.zrodlo-lista li.brak { color: var(--bs-secondary-color); }
+.zrodlo-lista li.brak::before { content: "—"; color: #dc2626; }
+
+.zrodlo-stopka {
+    font-size: var(--f-drobny); color: var(--bs-secondary-color);
+    margin-top: .75rem; line-height: 1.45;
+}
+
+/* ── PASEK KROKU ── */
+.pasek-kroku {
+    position: sticky; top: 0; z-index: 20;
+    margin: -1.5rem -1.5rem 2.1rem;
+    background: var(--bs-body-bg);
+    border-bottom: 1px solid var(--karta-obramowanie);
+    box-shadow: 0 2px 8px rgba(25, 22, 25, .06);
+}
+.pasek-kroku-tresc {
+    max-width: var(--szer-tresci); margin: 0 auto;
+    display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+    padding: .7rem 1.5rem;
+}
+.pasek-kroku-opis {
+    display: flex; flex-direction: column; min-width: 0; flex: 1 1 auto;
+    text-align: center; align-items: center;
+}
+.pasek-kroku-licznik {
+    font-size: var(--f-drobny); font-weight: 700; text-transform: uppercase;
+    letter-spacing: .06em; color: var(--marka);
+}
+/* Nazwa bieżącego kroku: całość, w razie potrzeby w dwóch wierszach —
+   nazwy obszarów rozporządzenia 2024/2690 bywają długie. */
+.pasek-kroku-nazwa {
+    font-size: var(--f-tekst); font-weight: 600; line-height: 1.25;
+    overflow-wrap: anywhere;
+}
+.pasek-kroku-postep { height: 3px; background: var(--bs-tertiary-bg); }
+.pasek-kroku-postep > div { height: 100%; background: var(--marka); transition: width .25s; }
+
+/* Strzałki nawigacji: wstecz po lewej, dalej po prawej, obie w stałym
+   miejscu. Szerokość ograniczona, żeby długa nazwa kroku nie zepchnęła
+   licznika ze środka paska. */
+.btn-krok {
+    display: inline-flex; align-items: center; gap: .4rem;
+    flex-shrink: 0; max-width: 15rem;
+    font-size: var(--f-pomocniczy); font-weight: 600; border-radius: 8px;
+    padding: .42rem .8rem; border: 1px solid var(--karta-obramowanie);
+    background: var(--bs-body-bg); color: var(--bs-body-color);
+}
+.btn-krok .etykieta { white-space: nowrap; }
+.btn-krok .strzalka { font-size: var(--f-tekst); line-height: 1; flex-shrink: 0; }
+.btn-krok:hover:not(:disabled) { background: var(--marka-jasna); border-color: var(--marka); color: var(--marka); }
+.btn-krok:disabled { opacity: .38; cursor: default; }
+/* Kolor podany także dzieciom: napis i strzałka są osobnymi elementami,
+   a Bootstrap ustawia na przycisku --bs-btn-color, który dziedziczy się
+   do wnętrza i wygrywał z kolorem samego przycisku — biały tekst wychodził
+   ciemny na karmazynowym tle, 2,45:1. */
+.btn-krok-dalej,
+.btn-krok-dalej .etykieta,
+.btn-krok-dalej .strzalka {
+    color: #fff;
+}
+.btn-krok-dalej {
+    background: var(--marka-plakietka); border-color: var(--marka-plakietka);
+}
+.btn-krok-dalej:hover:not(:disabled) { background: var(--marka-ciemna); border-color: var(--marka-ciemna); color: #fff; }
+/* Ostatni krok: przycisk „Dalej" jest wyłączony i niesie napis „Koniec
+   oceny". Bootstrap daje wyłączonemu przyciskowi jasne tło, a napis był
+   biały — na ekranie zostawała pusta ramka. */
+.btn-krok-dalej:disabled { background: var(--bs-tertiary-bg); border-color: var(--karta-obramowanie); opacity: 1; }
+.btn-krok-dalej:disabled .etykieta,
+.btn-krok-dalej:disabled .strzalka { color: var(--bs-secondary-color); }
+/* Pola wymagane nieuzupełnione — przycisk nadal działa i prowadzi do
+   brakującego pola, ale wygląda na wstrzymany. Kolor musi być podany
+   wprost dla obu motywów: --bs-secondary-color jest w ciemnym jasnoszary,
+   więc biały napis na nim dawał 2,1:1. */
+.btn-krok-blokada, .btn-krok-blokada .etykieta, .btn-krok-blokada .strzalka { color: #fff; }
+.btn-krok-blokada { background: #5c636a; border-color: #5c636a; }
+.btn-krok-blokada:hover { background: #4b5259; border-color: #4b5259; color: #fff; }
+[data-bs-theme="dark"] .btn-krok-blokada,
+[data-bs-theme="dark"] .btn-krok-blokada .etykieta,
+[data-bs-theme="dark"] .btn-krok-blokada .strzalka { color: #ece9ee; }
+[data-bs-theme="dark"] .btn-krok-blokada { background: #3a3640; border-color: #3a3640; }
+[data-bs-theme="dark"] .btn-krok-blokada:hover { background: #494452; border-color: #494452; color: #fff; }
+.podpowiedz-przerwania { font-size: var(--f-drobny); line-height: 1.35; }
+
+@media (max-width: 991px) {
+    .pasek-kroku { margin: -1rem -1rem 1.6rem; }
+    .pasek-kroku-tresc { padding: .6rem 1rem; gap: .5rem; }
+    .pasek-kroku-nazwa { font-size: var(--f-tekst); }
+    .btn-krok { max-width: none; padding: .42rem .55rem; }
+    .btn-krok .etykieta { display: none; }
+}
+
+/* ── NUMERACJA KROKÓW W PANELU ── */
+.numer-kroku {
+    width: 22px; height: 22px; flex-shrink: 0; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: var(--f-drobny); font-weight: 700;
+    background: var(--bs-tertiary-bg); color: var(--bs-secondary-color);
+}
+/* Biały krążek na tle marki — kolor cyfry musi być ciemnym karmazynem,
+   bo rozjaśniona --marka z motywu ciemnego daje na bieli 3,3:1. */
+.pozycja-kroku.aktywna .numer-kroku { background: #fff; color: var(--marka-plakietka); }
+.pozycja-kroku.przeszla .numer-kroku { background: #157347; color: #fff; }
+
+/* ── POLA WYMAGANE ── */
+.pole-brakujace,
+.pole-brakujace:focus {
+    border-color: #dc2626 !important;
+    box-shadow: 0 0 0 .18rem rgba(220, 38, 38, .16) !important;
+}
+.sekcja-brakujaca {
+    outline: 2px solid #dc2626; outline-offset: 6px; border-radius: 8px;
+}
+
+.alert-braki {
+    background: rgba(220, 38, 38, .07);
+    border: 1px solid rgba(220, 38, 38, .35);
+    border-left: 4px solid #dc2626;
+    border-radius: 9px; padding: .85rem 1.05rem; margin-bottom: 1rem;
+}
+.alert-braki a { color: #dc2626; font-weight: 600; }
+[data-bs-theme="dark"] .alert-braki { background: rgba(220, 38, 38, .12); }
+[data-bs-theme="dark"] .alert-braki a { color: #fca5a5; }
+
+/* Gwiazdka przy polu wymaganym — wyraźniejsza niż domyślna */
+.form-label .text-danger { font-weight: 700; }
+
+/* Przełącznik trybu offline w pasku górnym */
+.btn-offline.aktywny {
+    background: var(--marka-plakietka); border-color: var(--marka-plakietka); color: #fff;
+}
+
+/* ── OD KIEDY OBOWIĄZUJE ── */
+.stosowanie {
+    border-left: 4px solid var(--bs-secondary-color);
+    padding: .6rem .85rem; margin-bottom: .75rem;
+    background: var(--bs-tertiary-bg); border-radius: 0 8px 8px 0;
+}
+.stosowanie:last-of-type { margin-bottom: 0; }
+.stosowanie-obowiazuje { border-left-color: #b02a37; }
+.stosowanie-okres-wdrozenia { border-left-color: #9a6700; }
+.stosowanie-naglowek { font-size: var(--f-pomocniczy); font-weight: 600; margin: .1rem 0 .35rem; }
+.termin-modulu {
+    font-size: var(--f-drobny); color: #7a5200; background: #fff8e6;
+    border-radius: 5px; padding: .2rem .45rem; margin-top: .45rem; display: inline-block;
+}
+[data-bs-theme="dark"] .termin-modulu { color: #fbbf24; background: #2b2007; }
+
+/* ── STOPKA ── */
+.stopka-narzedzia {
+    max-width: var(--szer-tresci); margin: 2.5rem auto 0; padding: 1rem 0 1.5rem;
+    border-top: 1px solid var(--karta-obramowanie);
+    font-size: var(--f-drobny); line-height: 1.55; color: var(--bs-secondary-color);
+}
+.stopka-narzedzia a { color: var(--marka); font-weight: 600; }
+
+/* Przyciski obrysowe Bootstrapa nie osiagaja 4,5:1 — ani szary #6c757d
+   na bieli, ani czerwony #dc3545 na ciemnym tle. */
+.btn-outline-secondary { --bs-btn-color: #5c636a; --bs-btn-border-color: #9aa1a9; }
+.btn-outline-danger { --bs-btn-color: #b02a37; --bs-btn-border-color: #d3818a; }
+[data-bs-theme="dark"] .btn-outline-secondary { --bs-btn-color: #c3bcc7; --bs-btn-border-color: #6d6873; }
+[data-bs-theme="dark"] .btn-outline-danger { --bs-btn-color: #f2a3ab; --bs-btn-border-color: #9c525b; }
+
+/* Terminy i ostrzezenia: domyslny #dc3545 daje 4,3:1 na tle kart. */
+.text-danger { --bs-danger-rgb: 176, 42, 55; }
+[data-bs-theme="dark"] .text-danger { --bs-danger-rgb: 242, 163, 171; }
+/* Stan „obowiazuje": zielen Bootstrapa na ciemnej karcie daje 3,8:1. */
+.text-success { --bs-success-rgb: 21, 115, 71; }
+[data-bs-theme="dark"] .text-success { --bs-success-rgb: 74, 222, 128; }
+
+/* Klasa .text-secondary Bootstrapa nie czyta --bs-secondary-color, tylko
+   --bs-secondary-rgb (#6c757d), ktore sluzy takze za tlo przyciskow.
+   Zamiast przestawiac cala palete nadpisujemy sam kolor tekstu: #6c757d
+   daje na tle kart 4,3:1, a tekstu pomocniczego jest tu bardzo duzo. */
+.text-secondary { color: #656b72 !important; }
+[data-bs-theme="dark"] .text-secondary { color: #b6afba !important; }
+
+/* Przycisk pierwszoplanowy i obrysowy Bootstrapa w motywie ciemnym. */
+[data-bs-theme="dark"] .btn-outline-primary { --bs-btn-color: #f2a3ab; --bs-btn-border-color: #9c525b; }
+[data-bs-theme="dark"] .numer-kroku { color: #e6e1ea; }
+/* Wartosci kafelkow i slowo opisujace priorytet luki biora kolor
+   z danych — sa to nasycone ciemne barwy dobrane pod biale tlo,
+   ktore na ciemnym tle spadaja ponizej 3:1. */
+[data-bs-theme="dark"] .priorytet-tekst,
+[data-bs-theme="dark"] .kafelek-wartosc,
+[data-bs-theme="dark"] .miara .wartosc { filter: brightness(1.9) saturate(.85); }
+
+/* ── GRUPY RÓL WG SEKTORA ── */
+.grupa-rol + .grupa-rol { margin-top: .35rem; }
+.grupa-rol-naglowek {
+    font-size: var(--f-drobny); font-weight: 700; text-transform: uppercase;
+    letter-spacing: .07em; color: var(--marka);
+    padding-bottom: .3rem; margin-bottom: .55rem;
+    border-bottom: 1px solid var(--karta-obramowanie);
+}
+
+/* ── DOSTĘPNOŚĆ ── */
+/* Odnośnik pomijający nawigację: ukryty do czasu przejścia tabulatorem. */
+.pomin-nawigacje {
+    position: absolute; left: .5rem; top: -3rem; z-index: 2000;
+    background: var(--marka-plakietka); color: #fff; font-weight: 600;
+    padding: .55rem 1rem; border-radius: 0 0 8px 8px; text-decoration: none;
+    transition: top .15s;
+}
+.pomin-nawigacje:focus { top: 0; color: #fff; }
+
+/* Ikony rysowane, nie znakowe — znaki Unicode renderują się różnie na
+   różnych systemach, a czytnik ekranu odczytuje je dosłownie. */
+.ikona { width: 1em; height: 1em; display: block; }
+
+/* Widoczny stan skupienia klawiatury. Bootstrap daje własny cień, ale
+   na kartach pytań i kafelkach jest ledwie widoczny. */
+:where(a, button, input, select, textarea, .karta-roli, .opcja-skali):focus-visible {
+    outline: 3px solid var(--marka); outline-offset: 2px;
+}
+
+/* Na ekranach dotykowych podnosimy cele do zalecanych 44 px. Na myszy
+   zostawiamy kompaktowo, bo kwestionariusz ma kilkaset pozycji i każdy
+   dodatkowy piksel wysokości wydłuża przewijanie. */
+@media (pointer: coarse) {
+    .navbar .btn, .btn-krok { min-height: 44px; }
+    .pozycja-kroku { min-height: 44px; }
+    .form-check-input { width: 1.35rem; height: 1.35rem; }
+}
+
+/* Ruch tylko wtedy, gdy użytkownik go nie wyłączył. */
+@media (prefers-reduced-motion: reduce) {
+    .krok.aktywny { animation: none; }
+    * { transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
+
+/* ── LISTA KONTROLNA PROFILU ──
+   Trzy informacje przesądzają o klasyfikacji. Stoją na wierzchu kroku
+   przez cały czas, odhaczane na bieżąco — użytkownik ma widzieć, ile
+   zostało, zanim spróbuje przejść dalej. */
+.lista-kontrolna {
+    border: 1px solid var(--karta-obramowanie); border-left: 4px solid var(--marka-plakietka);
+    border-radius: 0 10px 10px 0; background: var(--bs-body-bg);
+    padding: .85rem 1.1rem; margin-bottom: 1.25rem;
+}
+.lista-kontrolna.komplet { border-left-color: #157347; }
+.lista-kontrolna.podswietlona { animation: zwrocUwage .5s ease; }
+@keyframes zwrocUwage { 0%,100% { transform: none; } 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+@media (prefers-reduced-motion: reduce) { .lista-kontrolna.podswietlona { animation: none; } }
+
+.lista-kontrolna-naglowek {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 1rem; font-weight: 600; font-size: var(--f-tekst); margin-bottom: .5rem;
+}
+.lista-kontrolna-licznik {
+    font-size: var(--f-drobny); font-weight: 700; letter-spacing: .04em;
+    color: var(--bs-secondary-color); white-space: nowrap;
+}
+.lista-kontrolna-pozycje {
+    list-style: none; counter-reset: krok; margin: 0; padding: 0;
+    display: flex; flex-wrap: wrap; gap: .35rem 1.5rem;
+}
+.lista-kontrolna-pozycje li {
+    counter-increment: krok; display: flex; align-items: center; gap: .45rem;
+    font-size: var(--f-pomocniczy);
+}
+.lista-kontrolna-pozycje .znak {
+    width: 20px; height: 20px; flex-shrink: 0; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: var(--f-drobny); font-weight: 700;
+}
+.lista-kontrolna-pozycje li.brak .znak {
+    background: var(--bs-tertiary-bg); color: var(--bs-secondary-color);
+    border: 1.5px dashed var(--bs-secondary-color);
+}
+.lista-kontrolna-pozycje li.brak .znak::before { content: counter(krok); }
+.lista-kontrolna-pozycje li.ok .znak { background: #157347; color: #fff; }
+.lista-kontrolna-pozycje li.ok span:last-child { color: var(--bs-secondary-color); }
+.lista-kontrolna-pozycje li.brak a { font-weight: 600; }
+
+/* Kroki jeszcze niedostępne — widoczne, żeby było wiadomo, co przed nami. */
+.pozycja-kroku.zamknieta { opacity: .45; }
+.pozycja-kroku.zamknieta:hover { background: transparent; }
+.klodka { margin-left: auto; font-size: var(--f-drobny); color: var(--bs-secondary-color); }
+
+/* ── LICZNIK DNI PRZY PODSTAWACH STOSOWANIA ──
+   Wydzielony kafelek po prawej: liczba dni jest tym, co decyduje
+   o kolejności działań, więc nie może być drobnym dopiskiem w rogu. */
+.stosowanie { display: flex; gap: 1.25rem; align-items: stretch; }
+.stosowanie-tresc { flex: 1 1 auto; min-width: 0; }
+.licznik-dni {
+    flex: 0 0 8.5rem; align-self: center;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: .7rem .5rem; border-radius: 10px;
+    background: var(--bs-body-bg); border: 1px solid var(--karta-obramowanie);
+}
+.licznik-liczba {
+    font-size: var(--f-naglowek); font-weight: 700; line-height: 1;
+    font-variant-numeric: tabular-nums; color: var(--bs-body-color);
+}
+.licznik-stan { font-size: var(--f-tekst); font-weight: 700; color: #157347; }
+[data-bs-theme="dark"] .licznik-stan { color: #4ade80; }
+.licznik-opis { font-size: var(--f-drobny); line-height: 1.3; color: var(--bs-secondary-color); margin-top: .25rem; }
+.licznik-pilny { border-color: #b02a37; }
+.licznik-pilny .licznik-liczba { color: #b02a37; }
+[data-bs-theme="dark"] .licznik-pilny { border-color: #f2a3ab; }
+[data-bs-theme="dark"] .licznik-pilny .licznik-liczba { color: #f2a3ab; }
+.licznik-wmocy { border-color: #157347; }
+[data-bs-theme="dark"] .licznik-wmocy { border-color: #4ade80; }
+
+@media (max-width: 640px) {
+    .stosowanie { flex-direction: column; gap: .75rem; }
+    .licznik-dni { flex: 0 0 auto; align-self: flex-start; flex-direction: row; gap: .5rem; }
+}
+
+.odeslanie-przecinek { color: var(--bs-secondary-color); }
+.karta-wielkosc { border-left: 4px solid var(--marka-plakietka); }
+/* Odesłanie wplecione w zdanie — subtelniejsze niż samodzielna plakietka,
+   ale wyraźnie klikalne. */
+/* Nazwa aktu krajowego wpleciona w zdanie — na stronie startowej i nad
+   raportem. Domyslny niebieski odsylacza na przygaszonym akapicie daje
+   3,7:1, czyli ponizej progu AA; dziedziczony kolor tekstu jest czytelny,
+   a podkreslenie nadal pokazuje, ze to odsylacz. */
+#podstawaKrajowa a, #podstawaKrajowaRaport a {
+    color: inherit; text-decoration: underline;
+    text-decoration-style: dotted; text-underline-offset: 2px;
+}
+
+.przepis-w-tekscie {
+    color: inherit; text-decoration: underline;
+    text-decoration-style: dotted; text-underline-offset: 2px;
+    text-decoration-color: var(--marka); cursor: help;
+}
+.przepis-w-tekscie:hover { color: var(--marka); text-decoration-style: solid; }
+
+/* ── PASEK AKCJI NA KROKU CZYTANYM ──
+   Krok „ekspozycja” niczego nie wymaga, ale wygląda jak formularz bez
+   pól. Pasek u góry mówi wprost, czego się tu nie robi i dokąd prowadzi
+   następne kliknięcie — działanie oddzielone od treści do przeczytania. */
+.pasek-akcji {
+    display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+    background: var(--marka-jasna); border-left: 4px solid var(--marka-plakietka);
+    border-radius: 0 10px 10px 0; padding: 1rem 1.25rem; margin-bottom: 1.5rem;
+}
+.pasek-akcji-tresc { flex: 1 1 22rem; min-width: 0; }
+.pasek-akcji-tytul { font-weight: 700; font-size: var(--f-tekst); margin-bottom: .2rem; }
+.pasek-akcji-opis { margin: 0; font-size: var(--f-pomocniczy); line-height: 1.55; color: var(--bs-body-color); }
+.btn-akcja, .btn-akcja:hover {
+    flex-shrink: 0; background: var(--marka-plakietka); border: 1px solid var(--marka-plakietka);
+    color: #fff; font-weight: 600; border-radius: 9px; padding: .6rem 1.1rem;
+}
+.btn-akcja:hover { background: var(--marka-ciemna); border-color: var(--marka-ciemna); }
+
+/* ── PODSUMOWANIE WYBORU MODUŁÓW ── */
+.podsumowanie-wyboru {
+    display: flex; flex-wrap: wrap; gap: 1rem 2.5rem; align-items: flex-start;
+    margin-top: 1.25rem; padding: 1rem 1.25rem;
+    border: 1px solid var(--karta-obramowanie); border-radius: 10px;
+    background: var(--bs-tertiary-bg);
+}
+.podsumowanie-pozycja { display: flex; flex-direction: column; }
+.podsumowanie-liczba {
+    font-size: var(--f-naglowek); font-weight: 700; line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.podsumowanie-opis { font-size: var(--f-pomocniczy); color: var(--bs-secondary-color); }
+.podsumowanie-uwaga {
+    flex: 1 1 100%; margin: 0; font-size: var(--f-drobny); line-height: 1.5;
+    color: var(--bs-secondary-color);
+}
+
+/* ── EKRAN STARTOWY: KARTY WPROWADZENIA ──
+   Trzy pytania zamiast trzech akapitów. Wcześniej bloki tekstu stały
+   jeden pod drugim, każdy w innym kolorze obwódki — szarym, zielonym,
+   czerwonym — przez co nic się nie wyróżniało i nic nie było czytane. */
+.karty-wprowadzenia {
+    display: grid; gap: 1rem; margin-top: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+}
+.karty-wprowadzenia-drugi-rzad { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+.karta-wprow {
+    background: var(--bs-body-bg); border: 1px solid var(--karta-obramowanie);
+    border-radius: 12px; padding: 1.15rem 1.35rem;
+}
+.karta-wprow h2 {
+    font-size: var(--f-drobny); font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--marka); margin: 0 0 .7rem;
+}
+.karta-wprow ul { margin: 0; padding: 0; list-style: none; }
+.karta-wprow li {
+    position: relative; padding-left: 1.1rem; margin-bottom: .42rem;
+    font-size: var(--f-pomocniczy); line-height: 1.5; color: var(--bs-secondary-color);
+}
+.karta-wprow li:last-child { margin-bottom: 0; }
+.karta-wprow li::before {
+    content: ""; position: absolute; left: 0; top: .6em;
+    width: 5px; height: 5px; border-radius: 50%; background: var(--marka);
+}
+.karta-wprow strong { color: var(--bs-body-color); font-weight: 600; }
+.karta-wprow-stopka {
+    margin: .9rem 0 0; padding-top: .7rem; font-size: var(--f-drobny); line-height: 1.5;
+    color: var(--bs-secondary-color); border-top: 1px solid var(--karta-obramowanie);
+}
+
+/* ── REKLAMA NA EKRANIE STARTOWYM ── */
+.karta-itoro-narzedzie {
+    display: flex; gap: 1.75rem; align-items: center; flex-wrap: wrap;
+    margin-top: 1rem; padding: 1.4rem 1.6rem; border-radius: 12px;
+    background: linear-gradient(158deg, #7a2033 0%, #4a1522 55%);
+    border-left: 4px solid #B72343; color: #fff;
+    box-shadow: inset 0 0 0 1px rgba(247, 194, 204, .18), 0 10px 26px rgba(139, 26, 52, .24);
+}
+.karta-itoro-tresc { flex: 1 1 26rem; min-width: 0; }
+.karta-itoro-nadtytul {
+    font-size: var(--f-drobny); font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+    color: #f7c2cc; margin: 0 0 .35rem;
+}
+.karta-itoro-narzedzie h2 { font-size: var(--f-tekst); margin: 0 0 .6rem; color: #fff; }
+.karta-itoro-narzedzie p { color: rgba(255,255,255,.85); font-size: var(--f-pomocniczy); line-height: 1.55; margin-bottom: .7rem; }
+.karta-itoro-narzedzie strong { color: #fff; }
+.btn-itoro, .btn-itoro:hover {
+    flex-shrink: 0; background: #fff; border: 1px solid #fff; color: #8E1A34;
+    font-weight: 600; border-radius: 9px; padding: .7rem 1.25rem; text-decoration: none;
+}
+.btn-itoro:hover { background: #f4dde2; border-color: #f4dde2; color: #6f1428; }
+
+/* ── PYTANIA I ODPOWIEDZI ── */
+.faq { border-bottom: 1px solid var(--karta-obramowanie); }
+.faq:last-of-type { border-bottom: 0; }
+.faq > summary {
+    cursor: pointer; padding: .6rem 0; font-weight: 600; font-size: var(--f-tekst);
+    list-style: none; display: flex; align-items: flex-start; gap: .55rem;
+}
+.faq > summary::-webkit-details-marker { display: none; }
+.faq > summary::before {
+    content: "+"; flex-shrink: 0; width: 1.1rem; height: 1.1rem; margin-top: .12rem;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%; background: var(--marka-plakietka); color: #fff;
+    font-size: var(--f-drobny); font-weight: 700; line-height: 1;
+}
+.faq[open] > summary::before { content: "\2212"; }
+.faq > summary:hover { color: var(--marka); }
+.faq-odpowiedz { padding: 0 0 .8rem 1.65rem; font-size: var(--f-pomocniczy); line-height: 1.6; color: var(--bs-secondary-color); }
+
+/* ── SYSTEM S46 ── */
+.kroki-s46 { margin: 0 0 1rem; padding-left: 1.3rem; }
+.kroki-s46 li { margin-bottom: .5rem; }
+.kroki-s46-tytul { display: block; font-weight: 600; font-size: var(--f-tekst); }
+.kroki-s46-opis { display: block; font-size: var(--f-pomocniczy); line-height: 1.5; color: var(--bs-secondary-color); }
+.linki-s46 { display: flex; flex-wrap: wrap; gap: .5rem 1rem; align-items: center; margin-top: 1rem; }
+.link-s46 { font-size: var(--f-pomocniczy); color: var(--marka); }
+
+/* ── KOMÓRKA ORGANU W TABELI RÓL ──
+   Nazwa organu i podstawa prawna w osobnych wierszach. Plakietka
+   odesłania wewnątrz nawiasu zawijała się w poprzek kolumny. */
+.komorka-organu { min-width: 12rem; }
+.organ-nazwa { display: block; font-weight: 600; margin-bottom: .2rem; }
+.organ-podstawa { display: block; }
+
+/* ── PUŁAP KARY ──
+   Trzy kwoty obok siebie zamiast jednej. Sam pułap wyrwany z kontekstu
+   sugerował karę oczekiwaną — obok stoi więc wariant procentowy,
+   który przy niskim przychodzie jest o rzędy wielkości niższy. */
+.kara-naglowek { font-weight: 700; font-size: var(--f-tekst); margin-bottom: .6rem; }
+.kara-kwoty { display: flex; flex-wrap: wrap; gap: .75rem 2rem; margin-bottom: .8rem; }
+.kara-pozycja { display: flex; flex-direction: column; }
+.kara-liczba { font-size: var(--f-tekst); font-weight: 600; font-variant-numeric: tabular-nums; line-height: 1.2; }
+.kara-pozycja-glowna .kara-liczba { font-size: var(--f-naglowek); font-weight: 700; }
+.kara-opis { font-size: var(--f-drobny); line-height: 1.35; color: var(--bs-secondary-color); }
+.kara-uwaga { border-left: 3px solid var(--marka-plakietka); padding-left: .7rem; line-height: 1.55; }
+
+/* ── MECHANIZM POWSTAWANIA PUŁAPU KARY ── */
+.mechanizm-kary { margin: 0 0 .8rem; padding-left: 1.2rem; }
+.mechanizm-kary li { margin-bottom: .6rem; }
+.mechanizm-tytul { display: block; font-weight: 600; font-size: var(--f-pomocniczy); }
+.mechanizm-opis { display: block; font-size: var(--f-pomocniczy); line-height: 1.5; color: var(--bs-secondary-color); }
+.mechanizm-podstawa { display: block; margin-top: .2rem; font-size: var(--f-drobny); }
+/* Ramka z mechanizmem pułapu w raporcie — stoi przed liczbami, bo bez
+   niej sama kwota czyta się jak kara do zapłaty. */
+.mechanizm-ramka {
+    border-left: 4px solid var(--marka-plakietka); background: var(--bs-tertiary-bg);
+    border-radius: 0 10px 10px 0; padding: .9rem 1.15rem; margin-bottom: 1rem;
+}
+.mechanizm-naglowek { font-weight: 700; font-size: var(--f-tekst); margin-bottom: .6rem; }
+
+/* ── LITERY SKRÓTU ──
+   Pierwsze litery, z których powstaje skrót nazwy aktu. Nazwy ustaw
+   zostają pisane małą literą — tak brzmią tytuły urzędowe i tak
+   cytuje się je w pismach. Wyróżnienie pokazuje pochodzenie skrótu,
+   nie zmieniając zapisu tytułu. */
+
+/* ── WYBÓR PAŃSTWA I JĘZYKA ── */
+/* Przyciski paska górnego mają jedną wysokość niezależnie od tego, czy
+   niosą tekst, czy samą ikonę — inaczej przełącznik motywu jest niższy
+   od sąsiadów i pasek wygląda na złożony z przypadkowych elementów. */
+.navbar .btn-sm { min-height: 2rem; display: inline-flex; align-items: center; justify-content: center; }
+.navbar .btn-sm .ikona { width: 1.05em; height: 1.05em; }
+.btn-wybor { display: inline-flex; align-items: center; gap: .4rem; white-space: nowrap; }
+.wybor-flaga { display: inline-flex; line-height: 1; }
+.wybor-kod-panstwa { display: inline-block; min-width: 2.1em; text-align: center; font-size: var(--f-drobny);
+                     font-weight: 700; letter-spacing: .04em; padding: .12rem .3rem; border-radius: 4px;
+                     background: var(--bs-tertiary-bg); color: var(--bs-secondary-color); font-family: ui-monospace, monospace; }
+.btn-wybor .wybor-kod-panstwa { background: rgba(255,255,255,.18); color: #fff; }
+.wybor-naglowek { font-weight: 700; font-size: var(--f-pomocniczy); text-transform: uppercase; letter-spacing: .05em;
+                  color: var(--bs-secondary-color); margin-bottom: .5rem; }
+.wybor-lista { display: flex; flex-direction: column; gap: .15rem; max-height: 52vh; overflow-y: auto;
+               padding-right: .25rem; }
+.wybor-grupa { font-size: var(--f-drobny); font-weight: 700; color: var(--bs-secondary-color);
+               text-transform: uppercase; letter-spacing: .05em; margin: .5rem 0 .2rem; }
+.wybor-grupa:first-child { margin-top: 0; }
+.wybor-pozycja { display: flex; align-items: center; gap: .6rem; width: 100%; text-align: left;
+                 background: transparent; border: 1px solid transparent; border-radius: 8px;
+                 padding: .45rem .65rem; color: var(--bs-body-color); font: inherit; cursor: pointer; }
+.wybor-pozycja:hover { background: var(--bs-tertiary-bg); }
+.wybor-pozycja.aktywna { border-color: var(--marka); background: var(--marka-jasna, var(--bs-tertiary-bg)); }
+.wybor-pozycja:focus-visible { outline: 3px solid var(--marka); outline-offset: 1px; }
+.wybor-nazwa { flex: 1; display: flex; flex-direction: column; line-height: 1.25; }
+.wybor-wlasna { font-size: var(--f-drobny); color: var(--bs-secondary-color); }
+.wybor-kod { font-size: var(--f-drobny); color: var(--bs-secondary-color); font-family: ui-monospace, monospace; }
+.wybor-stan { font-size: var(--f-drobny); font-weight: 700; padding: .1rem .45rem; border-radius: 4px; white-space: nowrap; }
+.stan-przygotowanie { background: rgba(180,83,9,.16); color: #b45309; }
+.stan-brak { background: rgba(107,114,128,.16); color: #6b7280; }
+[data-bs-theme="dark"] .stan-przygotowanie { color: #fbbf24; }
+[data-bs-theme="dark"] .stan-brak { color: #9ca3af; }

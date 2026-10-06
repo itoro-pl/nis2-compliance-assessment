@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="pl" data-bs-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-napis="html.1">ITORO — Ocena zgodności z ustawą o KSC (wdrożenie NIS 2)</title>
+<!-- seo:start -->
+<link rel="canonical" href="https://itoro.com.pl/narzedzia/ocena/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ITORO">
+<meta property="og:title" content="NIS 2 compliance assessment">
+<meta property="og:description" content="Entity status, supervisory authority, maximum fines, statutory deadlines and a gap analysis — in your country's law, in your language.">
+<meta property="og:url" content="https://itoro.com.pl/narzedzia/ocena/">
+<meta property="og:image" content="https://itoro.com.pl/narzedzia/obrazy/og-ocena-nis2.png">
+<meta name="twitter:card" content="summary_large_image">
+<!-- seo:end -->
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+<link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#191619">
+<link href="vendor/bootstrap.min.css" rel="stylesheet">
+<link href="styles.css" rel="stylesheet">
+</head>
+<body>
+
+<a class="pomin-nawigacje" href="#obszarTresci" data-napis="html.2">Przejdź do treści</a>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-marka fixed-top shadow-sm">
+  <div class="pasek-gorny">
+    <!-- Blok marki ma szerokość panelu bocznego, dzięki czemu tytuł
+         narzędzia zaczyna się dokładnie tam, gdzie kolumna treści. -->
+    <div class="pasek-marka">
+      <a href="#" onclick="doStartu();return false;" title="Lista ocen" data-napis-title="html.110" class="flex-shrink-0">
+        <img src="obrazy/itoro-logo.svg" alt="ITORO" class="logo-itoro">
+      </a>
+      <a class="link-itoro" href="https://itoro.com.pl" target="_blank" rel="noopener noreferrer">itoro.com.pl</a>
+    </div>
+
+    <span class="tytul-narzedzia"><span data-napis="html.tytulNaglowka">Ocena zgodności z ustawą o KSC</span> <span class="tytul-dopisek" data-napis="html.3">— wdrożenie NIS&nbsp;2</span></span>
+
+
+    <div class="pasek-przyciski">
+      <button class="btn btn-outline-light btn-sm d-lg-none" onclick="przelaczPanel()"
+              title="Pokaż postęp oceny" data-napis-title="html.111" aria-label="Pokaż postęp oceny" data-napis-aria-label="html.111">
+        <svg class="ikona" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+          <path d="M1.5 3h13M1.5 8h13M1.5 13h13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <button class="btn btn-outline-light btn-sm btn-wybor" id="wyborPanstwa" type="button"></button>
+      <button class="btn btn-outline-light btn-sm btn-offline" id="btnOffline" onclick="przelaczTrybOffline()">Online</button>
+      <button class="btn btn-outline-light btn-sm" id="btnMotyw" onclick="przelaczMotyw()"
+              title="Tryb jasny / ciemny" data-napis-title="html.112" aria-label="Przełącz tryb jasny lub ciemny" data-napis-aria-label="html.113">
+        <svg class="ikona" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+          <circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <path id="ikonaMotywu" d="M8 2a6 6 0 000 12z" fill="currentColor"/>
+        </svg>
+      </button>
+      <button class="btn btn-outline-light btn-sm btn-moje-oceny" onclick="doStartu()" title="Lista ocen" data-napis-title="html.110" data-napis="html.4">Moje oceny</button>
+    </div>
+  </div>
+</nav>
+
+<div class="uklad">
+  <aside class="panel-boczny" id="panelBoczny">
+    <div class="panel-naglowek">
+      <!-- Nazwa ocenianego podmiotu. Stała w pasku górnym, ale tam między
+           tytułem a przyciskami zostawało jej kilkanaście znaków i urywała
+           się wielokropkiem; w panelu mieści się w całości, w razie potrzeby
+           w dwóch wierszach. -->
+      <div class="nazwa-podmiotu" id="plakietkaOceny"></div>
+      <div class="text-uppercase small fw-bold text-secondary mb-1" data-napis="html.5">Postęp oceny</div>
+      <div class="progress" style="height:6px;"><div class="progress-bar bg-success" id="postepOgolny" style="width:0%"></div></div>
+      <small class="text-secondary" id="postepTekst" data-napis="html.6">0% wypełnione</small>
+    </div>
+    <nav class="nawigacja-krokow" id="nawigacjaKrokow" tabindex="0"></nav>
+    <div class="panel-stopka">
+      <button class="btn btn-migawka w-100 mb-2" onclick="zapiszMigawkeUI()"
+              title="Migawkę można zapisać na dowolnym etapie, bez konieczności ukończenia modułu. Odpowiedzi zapisują się automatycznie po każdej zmianie; migawka utrwala dodatkowo stan na dany dzień wraz z notatką, co pozwala udokumentować postęp wdrożenia." data-napis-title="html.114" data-napis-html="html.93">
+        <span class="btn-migawka-tytul">Zapisz migawkę</span>
+        <span class="btn-migawka-opis">utrwala stan oceny na dany dzień</span>
+      </button>
+      <small class="text-secondary d-block mb-2 podpowiedz-przerwania" data-napis="html.9">
+        Ocenę można przerwać na dowolnym etapie — odpowiedzi zapisują się automatycznie.
+      </small>
+      <small class="text-secondary d-block" id="infoZapisu"></small>
+    </div>
+  </aside>
+
+  <main class="obszar-tresci" id="obszarTresci">
+
+    <!-- PASEK KROKU: przyklejony u góry, żeby przejście dalej było
+         zawsze pod ręką, także na długich ekranach -->
+    <div class="pasek-kroku" id="pasekKroku">
+      <div class="pasek-kroku-tresc">
+        <button class="btn btn-krok btn-krok-wstecz" id="btnWsteczGora" onclick="poprzedniKrok()">
+          <span class="strzalka" aria-hidden="true">&#8592;</span><span class="etykieta" id="etykietaWstecz" data-napis="app.wstecz">Wstecz</span>
+        </button>
+        <div class="pasek-kroku-opis">
+          <span class="pasek-kroku-licznik" id="pasekLicznik"></span>
+          <span class="pasek-kroku-nazwa" id="pasekNazwa"></span>
+        </div>
+        <button class="btn btn-krok btn-krok-dalej" id="btnDalejGora" onclick="nastepnyKrok()">
+          <span class="etykieta" id="etykietaDalejTekst" data-napis="app.dalej">Dalej</span><span class="strzalka" aria-hidden="true">&#8594;</span>
+        </button>
+      </div>
+      <div class="pasek-kroku-postep"><div id="pasekKrokuPasek"></div></div>
+    </div>
+
+    <!-- EKRAN STARTOWY -->
+    <section class="krok aktywny" data-krok="start">
+      <div class="naglowek-kroku">
+        <h1 class="tytul-ekranu" data-napis="html.10">Ocena zgodności z ustawą o krajowym systemie cyberbezpieczeństwa (KSC)</h1>
+        <p class="podtytul-ekranu" data-napis="html.11">Ustawa wdraża dyrektywę (UE) 2022/2555 (NIS&nbsp;2). Ocena obejmuje także
+          rozporządzenie wykonawcze Komisji (UE) 2024/2690 oraz Prawo komunikacji
+          elektronicznej (PKE) — w zakresie, w jakim dotyczą podmiotu.</p>
+        <p class="text-secondary mb-0" data-napis="html.12">Samoocena dla operatorów sieci, centrów danych, pozostałej
+          infrastruktury cyfrowej oraz podmiotów publicznych.</p>
+      </div>
+
+      <div class="d-flex flex-wrap gap-2 mb-4">
+        <button class="btn btn-primary btn-lg" onclick="nowaOcenaUI()" data-napis="html.13">Nowa ocena podmiotu</button>
+        <button class="btn btn-outline-secondary btn-lg" onclick="wybierzPlikOceny()" data-napis="html.14">Wczytaj z pliku JSON</button>
+        <input type="file" id="plikImportu" accept=".json,application/json" class="d-none" onchange="importujPlik(event)">
+      </div>
+
+      <div id="listaOcen"></div>
+
+      <!-- Trzy pytania zamiast trzech akapitów. Bloki tekstu jeden pod
+           drugim, każdy w innym kolorze obwódki, zlewały się w ścianę,
+           przez którą nikt nie przechodził. -->
+      <div class="karty-wprowadzenia">
+        <div class="karta-wprow">
+          <h2 data-napis="html.15">Co to sprawdza</h2>
+          <ul>
+            <li data-napis-html="html.94">czy podmiot jest <strong>kluczowy</strong>, <strong>ważny</strong>, czy poza ustawą</li>
+            <li data-napis="html.17">który organ go nadzoruje i pod jaki zestaw wymagań podlega</li>
+            <li data-napis="html.18">ile wynosi ustawowy pułap kary dla podmiotu i dla kierownika</li>
+            <li data-napis="html.19">ile zostało czasu do każdego terminu ustawowego</li>
+            <li data-napis="html.20">jak daleko jest wdrożenie — obszar po obszarze</li>
+          </ul>
+        </div>
+
+        <div class="karta-wprow">
+          <h2 data-napis="html.21">Jak to działa</h2>
+          <ul>
+            <li data-napis-html="html.95"><strong>Profil podmiotu</strong> — trzy informacje wystarczą do klasyfikacji</li>
+            <li data-napis="html.23">sprawozdanie finansowe z KRS albo NIP wypełniają resztę automatycznie</li>
+            <li data-napis-html="html.96"><strong>Raport zarządczy</strong> dostajesz zanim odpowiesz na pierwsze pytanie</li>
+            <li data-napis="html.25">zakres pytań dobiera się do ról — bez wymagań, które nie dotyczą</li>
+            <li data-napis="html.26">ocenę można przerwać w każdej chwili, odpowiedzi zapisują się same</li>
+          </ul>
+        </div>
+
+        <div class="karta-wprow">
+          <h2 data-napis="html.27">Co zostaje na końcu</h2>
+          <ul>
+            <li data-napis="html.28">raport dla zarządu z ekspozycją finansową i osobistą</li>
+            <li data-napis="html.29">lista luk uszeregowana według priorytetu</li>
+            <li data-napis="html.30">rejestr obowiązków niewykonanych wraz z sankcją za każdy</li>
+            <li>eksport do <strong>XLSX</strong>, <strong>PDF</strong> i <strong>JSON</strong></li>
+            <li data-napis="html.31">migawki pozwalające udokumentować postęp w czasie</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="karty-wprowadzenia karty-wprowadzenia-drugi-rzad">
+        <div class="karta-wprow karta-wprow-prawo">
+          <h2 data-napis="html.32">Podstawa prawna oceny</h2>
+          <ul>
+            <li data-napis="html.33">ustawa z 5 lipca 2018 r. o krajowym systemie cyberbezpieczeństwa (KSC), w brzmieniu nadanym nowelizacją z 23 stycznia 2026 r.</li>
+            <li data-napis="html.34">rozporządzenie wykonawcze Komisji (UE) 2024/2690</li>
+            <li id="podstawaKrajowa" data-napis="html.33a">ustawa z 12 lipca 2024 r. — Prawo komunikacji elektronicznej (PKE)</li>
+            <li data-napis="html.35">załącznik nr 4 do ustawy o KSC — dla podmiotów publicznych o statusie podmiotu ważnego</li>
+          </ul>
+          <p class="karta-wprow-stopka" data-napis="html.36">Narzędzie służy samoocenie. Nie jest audytem w rozumieniu
+            art. 15 ustawy o KSC ani opinią prawną.</p>
+        </div>
+
+        <div class="karta-wprow karta-wprow-dane">
+          <h2 data-napis="html.37">Gdzie trafiają dane</h2>
+          <ul>
+            <li data-napis-html="html.97">odpowiedzi, dowody i sprawozdania finansowe zostają <strong>w tej przeglądarce</strong></li>
+            <li data-napis="html.39">nic nie jest przekazywane do ITORO ani do innych serwisów</li>
+            <li data-napis="html.40">jedyne połączenie wychodzące to odpytanie rejestrów publicznych — wysyłany jest wyłącznie numer NIP</li>
+            <li data-napis-html="html.98">przycisk <strong>Online / Offline</strong> w pasku u góry wyłącza je całkowicie</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card mt-4" id="kartaFaq">
+        <div class="card-header"><h5 class="mb-0" data-napis="html.42">Zanim zaczniesz — częste pytania</h5></div>
+        <div class="card-body" id="faqStart"></div>
+      </div>
+
+      <!-- Reklama ma własną, karmazynową powierzchnię marki, żeby nie
+           zlewała się z szarymi kartami informacyjnymi obok. Występuje
+           na stronie tylko raz — stopka jej nie powtarza. -->
+      <aside class="karta-itoro-narzedzie">
+        <div class="karta-itoro-tresc">
+          <p class="karta-itoro-nadtytul" data-napis="html.43">Narzędzie udostępnia bezpłatnie itoro.com.pl</p>
+          <h2 data-napis="html.44">Poprawiamy bezpieczeństwo Twojej sieci</h2>
+          <p data-napis-html="html.99">
+            Zajmujemy się ochroną sieci przed atakami DDoS oraz bezpieczeństwem
+            <strong>operatorów (ISP)</strong>, <strong>centrów danych</strong> i firm
+            posiadających <strong>własne sieci dostępowe</strong>.
+          </p>
+          <p class="mb-0" data-napis="html.48">
+            Jeżeli ocena wykaże luki w ciągłości działania, monitorowaniu albo obsłudze
+            incydentów, możemy je zamknąć.
+          </p>
+        </div>
+        <a class="btn btn-itoro" href="https://itoro.com.pl" target="_blank" rel="noopener noreferrer" data-napis="html.49">Poznaj ofertę</a>
+      </aside>
+    </section>
+
+    <!-- PROFIL PODMIOTU -->
+    <section class="krok" data-krok="profil">
+      <div class="naglowek-kroku">
+        <h2 class="h4 mb-1" data-napis="html.22">Profil podmiotu</h2>
+        <p class="text-secondary mb-0" data-napis="html.50">Dane identyfikacyjne, role i wielkość podmiotu. Od nich zależy klasyfikacja i dobór kwestionariusza. Przy podmiocie publicznym wielkość odpowiada liczbie etatów: „średni” to co najmniej 50 osób.</p>
+      </div>
+
+      <div id="brakiProfilu"></div>
+
+      <div class="card mb-3" id="kartaZrodel">
+        <div class="card-body">
+          <h5 class="fw-semibold mb-1" data-napis="html.51">Źródło danych podmiotu</h5>
+          <p class="text-secondary mb-3" id="opisZrodel" data-napis="html.52">Dostępne są dwie drogi automatycznego uzupełnienia profilu. Pola można również wypełnić ręcznie.</p>
+
+          <div class="row g-3 zrodla-danych" id="zrodlaDanych">
+            <div class="col-lg-6">
+              <div class="zrodlo zrodlo-pelne">
+                <div class="zrodlo-plakietka" data-napis="html.53">Pełne dane · zalecane</div>
+                <h6 class="zrodlo-tytul" data-napis="html.54">Sprawozdanie finansowe</h6>
+                <p class="zrodlo-opis" data-napis-html="html.100">
+                  Jeden plik uzupełnia <strong>komplet danych</strong>: nazwę, NIP, KRS, adres
+                  oraz <strong>przychód</strong> za rok obrotowy — a od niego zależy wysokość kary.
+                </p>
+                <ul class="zrodlo-lista">
+                  <li data-napis="html.daneZeSprawozdania">nazwa, NIP, KRS, adres siedziby</li>
+                  <li data-napis-html="html.101"><strong>przychód za rok obrotowy</strong></li>
+                  <li data-napis="html.57">przychód roku poprzedniego, do porównania</li>
+                </ul>
+                <div class="d-flex flex-wrap gap-2 mt-auto">
+                  <button class="btn btn-primary" onclick="document.getElementById('plikSF').click()" data-napis="html.58">Wczytaj sprawozdanie</button>
+                  <a class="btn btn-outline-secondary" id="btnRdf" href="https://rdf-przegladarka.ms.gov.pl/wyszukaj-podmiot"
+                     target="_blank" rel="noopener" onclick="otworzRdf();return false;" data-napis="html.59">Pobierz z RDF</a>
+                  <input type="file" id="plikSF" accept=".xml,.zip,application/xml,text/xml,application/zip" class="d-none" onchange="wczytajSprawozdanie(event)">
+                </div>
+
+                <div class="zrodlo-stopka" data-napis="html.60">
+                  Przyjmuje plik XML albo archiwum ZIP pobrane z Repozytorium Dokumentów Finansowych KRS.
+                  Sam plik czytany jest wyłącznie w tej przeglądarce. Numer NIP odczytany ze sprawozdania
+                  posłuży do automatycznego dobrania reszty danych i ról.
+                </div>
+                <div id="wynikSF"></div>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="zrodlo zrodlo-czesciowe">
+                <div class="zrodlo-plakietka" data-napis="html.61">Dane częściowe</div>
+                <h6 class="zrodlo-tytul" data-napis="html.62">Wyszukanie po numerze NIP</h6>
+                <p class="zrodlo-opis" data-napis-html="html.102">
+                  Szybsze, ale <strong>bez przychodu</strong>. Za to potwierdza wpis
+                  do rejestru przedsiębiorców telekomunikacyjnych i podpowiada role na podstawie PKD.
+                </p>
+                <ul class="zrodlo-lista">
+                  <li data-rejestr-krajowy>nazwa, REGON, KRS, forma prawna, adres</li>
+                  <li data-napis="html.63">sugerowane role na podstawie kodów PKD</li>
+                  <li data-napis="html.64">wpis do rejestru przedsiębiorców telekomunikacyjnych</li>
+                  <li class="brak" data-napis="html.65">przychodu nie ma w żadnym rejestrze</li>
+                </ul>
+                <div class="d-flex flex-wrap gap-2 align-items-end mt-auto">
+                  <div class="flex-grow-1" style="min-width:170px">
+                    <label class="form-label small mb-1" for="polNip" data-napis="html.66">NIP podmiotu</label>
+                    <input type="text" class="form-control" id="polNip" placeholder="np. 5260250995" inputmode="numeric">
+                  </div>
+                  <button class="btn btn-outline-primary" id="btnPobierzNip" onclick="pobierzZRejestru()" data-napis="html.67">Pobierz ponownie</button>
+                </div>
+                <div class="zrodlo-stopka" data-napis="html.68">
+                  Odpytuje wykaz podatników VAT, Krajowy Rejestr Sądowy i rejestr Prezesa UKE.
+                  Pobieranie uruchamia się automatycznie po wpisaniu poprawnego numeru.
+                </div>
+                <div id="wynikNip"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="alert alert-secondary small mt-3 mb-0" data-napis-html="html.103">
+            <strong>Wielkość przedsiębiorstwa</strong> wskazujesz sam — nie ma jej w żadnym rejestrze,
+            a razem z rolami przesądza o klasyfikacji podmiotu.
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="row g-3">
+            <div class="col-md-8">
+              <label class="form-label small mb-1" for="polNazwa" data-napis-html="html.104">Nazwa podmiotu <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="polNazwa">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small mb-1" for="polData" data-napis="html.70">Data oceny</label>
+              <input type="date" class="form-control" id="polData">
+            </div>
+            <div class="col-md-4" data-rejestr-krajowy>
+              <label class="form-label small mb-1" for="polRegon">REGON</label>
+              <input type="text" class="form-control" id="polRegon">
+            </div>
+            <div class="col-md-4" data-rejestr-krajowy>
+              <label class="form-label small mb-1" for="polKrs">KRS</label>
+              <input type="text" class="form-control" id="polKrs">
+              <div class="form-text" id="linkRdf"></div>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small mb-1" for="polForma" data-napis="html.71">Forma prawna</label>
+              <input type="text" class="form-control" id="polForma">
+            </div>
+            <div class="col-12">
+              <label class="form-label small mb-1" for="polAdres" data-napis="html.72">Adres siedziby</label>
+              <input type="text" class="form-control" id="polAdres">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 karta-wielkosc">
+        <div class="card-body">
+          <h6 class="fw-semibold mb-1" data-napis-html="html.105">Wielkość podmiotu <span class="text-danger">*</span></h6>
+          <p class="small text-secondary mb-3" data-napis="html.73">Jedyna informacja, której nie ma w żadnym rejestrze — trzeba ją wskazać samodzielnie. Razem z rolami przesądza o klasyfikacji, a ta o zakresie obowiązków i wysokości kary.</p>
+          <div class="row g-3 align-items-start">
+            <div class="col-lg-7">
+              <label class="form-label small mb-1" for="polWielkosc" data-napis-html="html.106">Wielkość przedsiębiorstwa <span class="text-danger">*</span></label>
+              <select class="form-select" id="polWielkosc"></select>
+              <div class="form-text" id="opisWielkosci"></div>
+              <div class="form-text" data-napis="html.74">Progi wg załącznika I do rozporządzenia (UE) nr 651/2014. Przy podmiocie publicznym „średni” odpowiada zatrudnieniu co najmniej 50 osób.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3">
+        <div class="card-body">
+          <h6 class="fw-semibold mb-1" data-napis-html="html.107">Role podmiotu <span class="text-danger">*</span></h6>
+          <p class="small text-secondary" data-napis="html.75">Zaznacz wszystkie rodzaje działalności prowadzonej faktycznie. Jeden podmiot zwykle łączy kilka ról, a każda może uruchamiać inne obowiązki i innego organu nadzoru.</p>
+          <div id="listaRol" class="row g-2"></div>
+        </div>
+      </div>
+
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label small mb-1" for="polPrzychod" data-napis="html.76">Roczny przychód (zł)</label>
+              <input type="text" class="form-control pole-kwota" id="polPrzychod" inputmode="numeric" placeholder="np. 4 000 000">
+              <div class="podglad-kwoty" id="podgladPrzychod"></div>
+              <div class="form-text" data-napis="html.77">Podstawa wyliczenia maksymalnej kary.</div>
+            </div>
+            <div class="col-md-6" id="wierszPrzychodTelekom" style="display:none;">
+              <label class="form-label small mb-1" for="polPrzychodTelekom" data-napis="html.78">Przychód z działalności telekomunikacyjnej (zł)</label>
+              <input type="text" class="form-control pole-kwota" id="polPrzychodTelekom" inputmode="numeric" placeholder="np. 15 000 000">
+              <div class="podglad-kwoty" id="podgladPrzychodTelekom"></div>
+              <div class="form-text" data-napis="html.79">Powyżej 10 mln zł skraca termin wycofania sprzętu dostawcy wysokiego ryzyka z 7 do 4 lat (art. 67b ust. 1 pkt 2).</div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small mb-1" for="polWynagrodzenie" data-napis="html.80">Miesięczne wynagrodzenie kierownika (zł)</label>
+              <input type="text" class="form-control pole-kwota" id="polWynagrodzenie" inputmode="numeric" placeholder="np. 25 000">
+              <div class="podglad-kwoty" id="podgladWynagrodzenie"></div>
+              <div class="form-text" data-napis="html.81">Podstawa wyliczenia odpowiedzialności osobistej. Pole opcjonalne.</div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small mb-1" for="polKurs" data-napis="html.82">Kurs EUR/PLN</label>
+              <input type="number" class="form-control" id="polKurs" min="0" step="0.0001">
+              <div class="form-text" data-napis="html.83">Średni kurs NBP z 31 grudnia roku poprzedzającego rok wydania decyzji.</div>
+            </div>
+            <div class="col-12">
+              <div class="form-check"><input class="form-check-input" type="checkbox" id="polKwalifikowany">
+                <label class="form-check-label small" for="polKwalifikowany" data-napis-html="html.108">Podmiot jest <strong>kwalifikowanym</strong> dostawcą usług zaufania</label></div>
+              <div class="form-check"><input class="form-check-input" type="checkbox" id="polNiezalezne">
+                <label class="form-check-label small" for="polNiezalezne" data-napis="html.84">Status wynika wyłącznie z agregacji danych przedsiębiorstw powiązanych, a system informacyjny podmiotu jest niezależny (art. 5 ust. 6 i 7)</label></div>
+              <div class="form-check"><input class="form-check-input" type="checkbox" id="polMON">
+                <label class="form-check-label small" for="polMON" data-napis="html.85">Podmiot podlega Ministrowi Obrony Narodowej lub jest przez niego nadzorowany</label></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="podgladKlasyfikacji"></div>
+    </section>
+
+    <!-- RAPORT WSTĘPNY -->
+    <section class="krok" data-krok="raport-wstepny">
+      <div class="naglowek-kroku">
+        <h2 class="h4 mb-1" data-napis="html.86">Ekspozycja prawna i finansowa</h2>
+        <p class="text-secondary mb-0" data-napis="html.87">Status podmiotu, organy nadzoru, pułapy kar i terminy ustawowe. Wynikają wprost z profilu — nie wymagają wypełnienia kwestionariusza.</p>
+      </div>
+      <div id="trescRaportuWstepnego"></div>
+    </section>
+
+    <!-- WYBÓR MODUŁÓW -->
+    <section class="krok" data-krok="moduly">
+      <div class="naglowek-kroku">
+        <h2 class="h4 mb-1" data-napis="html.88">Wybór modułów</h2>
+        <p class="text-secondary mb-0" data-napis="html.89">Wybór obszarów objętych oceną w tym przebiegu. Do pozostałych można wrócić w dowolnym momencie.</p>
+      </div>
+      <div id="trescModulow"></div>
+    </section>
+
+    <!-- SEKCJE PYTAŃ (generowane) -->
+    <div id="kontenerSekcji"></div>
+
+    <!-- WYNIKI -->
+    <section class="krok" data-krok="wyniki">
+      <div class="naglowek-kroku">
+        <h2 class="h4 mb-1" data-napis="html.90">Raport zgodności</h2>
+        <p class="text-secondary mb-0" id="podtytulWynikow"></p>
+        <!-- Akt wdrazajacy danego panstwa: raport ida do zarzadu, wiec musi
+             nazywac prawo, ktore podmiot wiaze. Wypelnia ui/app.js. -->
+        <p class="text-secondary small mb-0 mt-1" id="podstawaKrajowaRaport"></p>
+      </div>
+      <div id="trescWynikow"></div>
+    </section>
+
+    <div class="nawigacja-dolna" id="nawigacjaDolna">
+      <button class="btn btn-outline-secondary" id="btnWstecz" onclick="poprzedniKrok()" data-napis="app.wstecz">Wstecz</button>
+      <div class="flex-grow-1"></div>
+      <button class="btn btn-primary" id="btnDalej" onclick="nastepnyKrok()" data-napis="app.dalej">Dalej</button>
+    </div>
+
+    <footer class="stopka-narzedzia">
+      <p class="mb-1" data-napis="html.91">
+        Ocena zgodności z ustawą z dnia 5 lipca 2018 r. o krajowym systemie cyberbezpieczeństwa (KSC),
+        wdrażającą dyrektywę (UE) 2022/2555 (NIS&nbsp;2), z rozporządzeniem wykonawczym Komisji (UE) 2024/2690
+        oraz z ustawą z dnia 12 lipca 2024 r. — Prawo komunikacji elektronicznej (PKE).
+      </p>
+      <p class="mb-1" data-napis="html.92">
+        Nie stanowi opinii prawnej; wszystkie dane pozostają w tej przeglądarce
+        lub lokalnie na Twoim komputerze.
+      </p>
+      <p class="mb-0" data-napis-html="html.109">
+        Wersja <span id="wersjaNarzedzia"></span> ·
+        <a href="zmiany.html" target="_blank" rel="noopener">lista zmian</a>
+      </p>
+    </footer>
+  </main>
+</div>
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="powiadomienie" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header"><strong class="me-auto" id="tytulPowiadomienia">Informacja</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Zamknij"></button></div>
+    <div class="toast-body" id="trescPowiadomienia"></div>
+  </div>
+</div>
+
+<script src="vendor/bootstrap.bundle.min.js"></script>
+<script src="vendor/chart.umd.min.js"></script>
+<script src="vendor/chartjs-plugin-annotation.min.js"></script>
+<script src="vendor/xlsx.full.min.js"></script>
+
+<!-- Konfiguracja neutralna silnika i rejestr modułów krajowych -->
+<script src="core/i18n.js"></script>
+<script src="core/kraje.js"></script>
+<script src="core/panstwa.js"></script>
+<script src="core/odeslania.js"></script>
+<script src="core/wersja.js"></script>
+
+
+<!-- Moduł kraju ładuje core/ladowarka.js po wyborze państwa — patrz koniec pliku -->
+<!-- Kod aplikacji ładuje core/ladowarka.js po słowniku i module kraju —
+     kilka stałych (STATUS_OPIS, WARSTWY_OPIS, POLA_WYMAGANE) woła napis()
+     w chwili ładowania, więc słownik musi już być. -->
+<script src="ui/wybor.js"></script>
+<script src="core/ladowarka.js"></script>
+<script>
+  uruchom();
+</script>
+</body>
+</html>

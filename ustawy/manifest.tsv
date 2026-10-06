@@ -1,0 +1,76 @@
+# Zrodla tekstow ustaw krajowych. Kolumny: kod, plik, adres pobrania, uwaga.
+# Adresy dzialajace potwierdzone pobraniem. Serwery zmieniaja sie -
+# przy odswiezaniu sprawdzic, czy nadal odpowiadaja.
+AT	nisg-2026-bgbl-i-94-2025.pdf	https://ris.bka.gv.at/Dokumente/BgblAuth/BGBLA_2025_I_94/BGBLA_2025_I_94.pdf	dziala z przegladarki; automat blokowany, dla skryptu uzyc ogd.ris.bka.gv.at
+BG	dv-17-2026-zid-zks.pdf	https://dv.parliament.bg/DVWeb/broeveList.faces	brak stalego adresu - Darzhaven vestnik nr 17/2026, wyszukac w wykazie numerow
+BG	dv-17-2026-zid-zks.rtf	https://dv.parliament.bg/DVWeb/broeveList.faces	format otwarty tego samego numeru
+CY	nomos-60-I-2025.pdf	https://www.cylaw.org/nomoi/arith/2025_1_060.pdf	
+DE	nis2umsucg-bgbl-2025-301.pdf	https://www.recht.bund.de/bgbl/1/2025/301/regelungstext.pdf?__blob=publicationFile&v=3	
+DE	bsig-tekst-ujednolicony.pdf	https://www.gesetze-im-internet.de/bsig_2025/BSIG.pdf	tekst ujednolicony
+DK	lov-434-2025.pdf	https://www.retsinformation.dk/eli/lta/2025/434/pdf	
+FI	kyberturvallisuuslaki-124-2025.pdf	https://www.finlex.fi/api/media/statute/690158/mainPdf/main.pdf	Finlex jest SPA; dziala tylko ta sciezka API
+GR	nomos-5160-2024-fek-a-195.pdf	https://cyber.gov.gr/wp-content/uploads/2024/12/ENOTHTA_5_ΝΟΜΟΘΕΣΙΑ_fek_a_195_2024-5160-2024-1.pdf	et.gr wpada w petle przekierowan
+GR	nomos-5305-2026-fek-a-85.pdf	https://cyber.gov.gr/wp-content/uploads/2026/08/FEK_85_A_29-5-2026_NOMOS-5305_2026.pdf	
+HR	smjernice-samoprocjena-zsis.pdf	https://www.zsis.hr/UserDocsImages/Samoprocjena/Smjernice%20za%20provedbu%20samoprocjene%20kiberneticke%20sigurnosti.pdf	wytyczne z samoocena; brak samego Zakona i Uredby
+IT	determinazione-acn-164179-2025.pdf	https://www.acn.gov.it/portale/documents/d/guest/detacn_nis_specifiche_2025_164179_signed	specyfikacje ACN; brak d.lgs. 138/2024
+LU	loi-05-05-2026-memorial-a225.pdf	https://data.legilux.public.lu/filestore/eli/etat/leg/loi/2026/05/05/a225/jo/fr/pdfa/eli-etat-leg-loi-2026-05-05-a225-jo-fr-pdfa.pdf	legilux.public.lu zwraca powloke Angular; dziala data.legilux z filestore
+MT	sl-460-41-eng.pdf	https://legislation.mt/getpdf/69fc4110afa4500fcc46e6f6	id ze strony https://legislation.mt/eli/sl/460.41/eng
+MT	sl-460-41-mlt.pdf	https://legislation.mt/getpdf/69fc410bafa4641c34a689e1	tekst maltanski rozstrzyga przy rozbieznosci
+NL	cyberbeveiligingswet-stb-2026-187.pdf	https://zoek.officielebekendmakingen.nl/stb-2026-187.pdf	
+PT	decreto-lei-125-2025.pdf	https://files.diariodarepublica.pt/1s/2025/12/23400/0000400068.pdf	
+PT	regulamento-756-2026-anexy.pdf	https://files.diariodarepublica.pt/2s/2026/06/118000000/0003200120.pdf	zalaczniki I-IV
+RO	oug-155-2024-monitorul-oficial.pdf	https://www.cdep.ro/proiecte/2025/000/50/2/oug30.pdf	skan bez warstwy tekstowej
+SI	zinfv-1-ur-l-40-2025.pdf	https://www.uradni-list.si/_pdf/2025/Ur/u2025040.pdf	
+BE	loi-2024-04-26-justel-fr.pdf	https://www.ejustice.just.fgov.be/eli/loi/2024/04/26/2024202344/justel	wydruk urzedowego HTML do PDF (skrypty/pobierz-ustawy.py, 16.09.2026); obok .html z trescia strony; numac 2024202344, MB 17.05.2024
+BE	wet-2024-04-26-justel-nl.pdf	https://www.ejustice.just.fgov.be/eli/wet/2024/04/26/2024202344/justel	wydruk urzedowego HTML do PDF (skrypty/pobierz-ustawy.py, 16.09.2026); obok .html z trescia strony; tekst NL rownorzedny z FR
+BE	arrete-royal-2024-06-09-justel-fr.pdf	https://www.ejustice.just.fgov.be/eli/arrete/2024/06/09/2024005260/justel	wydruk urzedowego HTML do PDF (skrypty/pobierz-ustawy.py, 16.09.2026); obok .html z trescia strony; akt wykonawczy, numac 2024005260
+BE	koninklijk-besluit-2024-06-09-justel-nl.pdf	https://www.ejustice.just.fgov.be/eli/besluit/2024/06/09/2024005260/justel	wydruk urzedowego HTML do PDF (skrypty/pobierz-ustawy.py, 16.09.2026); obok .html z trescia strony
+CY	kdp-245-2024.pdf	https://dsa.cy/images/pdf-upload/Decision-245-2024.pdf	dsa.cy wpuszcza pelna przegladarke (Playwright), curl dostaje 403
+CY	kdp-391-2024.pdf	https://dsa.cy/images/pdf-upload/Decision-391-2024.pdf	
+CZ	zakon-264-2025-sb.pdf	https://e-sbirka.gov.cz/sb/2025/264?zalozka=text	wydruk urzedowego HTML do PDF (skrypty/pobierz-ustawy.py, 16.09.2026); obok .html z trescia strony; e-Sbirka chowa tresc w arkuszu druku, PDF sklada sie z fragmentow .fragment-wrapper
+CZ	vyhlaska-409-2025-sb.pdf	https://e-sbirka.gov.cz/sb/2025/409?zalozka=text	wydruk urzedowego HTML do PDF (skrypty/pobierz-ustawy.py, 16.09.2026); obok .html z trescia strony
+CZ	vyhlaska-410-2025-sb.pdf	https://e-sbirka.gov.cz/sb/2025/410?zalozka=text	wydruk urzedowego HTML do PDF (skrypty/pobierz-ustawy.py, 16.09.2026); obok .html z trescia strony
+EE	kuts-tekst-ujednolicony.pdf	https://www.riigiteataja.ee/public-api/api/v1/akt/130122025004/blob-html	wydruk urzedowego HTML do PDF (skrypty/pobierz-ustawy.py, 16.09.2026); obok .html z trescia strony; API bez naglowka kodowania - dekodowac jako UTF-8
+HR	zakon-nn-14-2024.pdf	https://narodne-novine.nn.hr/clanci/sluzbeni/2024_02_14_254.html	wydruk urzedowego HTML do PDF (skrypty/pobierz-ustawy.py, 16.09.2026); obok .html z trescia strony; adres z braki.json (…_222) byl bledny - wlasciwy numer 254
+HR	uredba-nn-135-2024.pdf	https://narodne-novine.nn.hr/clanci/sluzbeni/2024_11_135_2217.html	wydruk urzedowego HTML do PDF (skrypty/pobierz-ustawy.py, 16.09.2026); obok .html z trescia strony; Prilog II (samoocena) i III
+HU	torveny-2024-lxix.pdf	https://njt.jog.gov.hu/jogszabaly/2024-69-00-00	wydruk urzedowego HTML do PDF (skrypty/pobierz-ustawy.py, 16.09.2026); obok .html z trescia strony; tekst ujednolicony
+HU	korm-rendelet-418-2024.pdf	https://njt.jog.gov.hu/jogszabaly/2024-418-20-22	wydruk urzedowego HTML do PDF (skrypty/pobierz-ustawy.py, 16.09.2026); obok .html z trescia strony
+HU	mk-rendelet-7-2024.pdf	https://njt.jog.gov.hu/jogszabaly/2024-7-20-7G	wydruk urzedowego HTML do PDF (skrypty/pobierz-ustawy.py, 16.09.2026); obok .html z trescia strony; klasy bezpieczenstwa i srodki ochronne
+IT	dlgs-138-2024.pdf	https://www.normattiva.it/esporta/attoCompleto?atto.dataPubblicazioneGazzetta=2024-10-01&atto.codiceRedazionale=24G00155	wydruk urzedowego HTML do PDF (skrypty/pobierz-ustawy.py, 16.09.2026); obok .html z trescia strony; eksport dziala tylko w sesji rozpoczetej na stronie aktu (urn:nir:stato:decreto.legislativo:2024-09-04;138)
+LT	kibernetinio-saugumo-istatymas-xiv-2902.docx	https://e-seimas.lrs.lt/rs/legalact/TAD/1a8657f2427a11efb121d2fe3a0eff27/format/MSO2010_DOCX/	e-tar.lt stoi za Cloudflare (403); e-Seimas wydaje DOCX; obok PDF zlozony z akapitow DOCX
+LT	kibernetinio-saugumo-istatymas-xiv-2902.pdf	https://e-seimas.lrs.lt/rs/legalact/TAD/1a8657f2427a11efb121d2fe3a0eff27/format/MSO2010_DOCX/	wydruk z pliku kibernetinio-saugumo-istatymas-xiv-2902.docx (akapity DOCX zlozone do PDF); zrodlo to samo
+LT	nutarimas-945-2024.docx	https://e-seimas.lrs.lt/rs/legalact/TAD/22f960219fff11ef9db2c9aaf9c67042/format/MSO2010_DOCX/	Kibernetinio saugumo reikalavimu aprasas; obok PDF
+LT	nutarimas-945-2024.pdf	https://e-seimas.lrs.lt/rs/legalact/TAD/22f960219fff11ef9db2c9aaf9c67042/format/MSO2010_DOCX/	wydruk z pliku nutarimas-945-2024.docx (akapity DOCX zlozone do PDF); zrodlo to samo
+LV	nacionalas-kiberdrosibas-likums.pdf	https://likumi.lv/ta/id/353390	wydruk urzedowego HTML do PDF (skrypty/pobierz-ustawy.py, 16.09.2026); obok .html z trescia strony; redakcja z 18.06.2026
+LV	mk-noteikumi-397-2025.pdf	https://likumi.lv/ta/id/361481-minimalas-kiberdrosibas-prasibas	wydruk urzedowego HTML do PDF (skrypty/pobierz-ustawy.py, 16.09.2026); obok .html z trescia strony
+SE	sfs-2025-1506-cybersakerhetslag.pdf	https://data.riksdagen.se/dokument/sfs-2025-1506.html	wydruk urzedowego HTML do PDF (skrypty/pobierz-ustawy.py, 16.09.2026); obok .html z trescia strony; svenskforfattningssamling.se zwraca 403
+SE	sfs-2025-1507-forordning.pdf	https://data.riksdagen.se/dokument/sfs-2025-1507.html	wydruk urzedowego HTML do PDF (skrypty/pobierz-ustawy.py, 16.09.2026); obok .html z trescia strony
+SE	mcffs-2026-1.pdf	https://www.mcf.se/contentassets/2fb733fa000a4bba98cf9b406f4c9153/mcffs-2026-1.pdf	zgloszenia i identyfikacja podmiotow
+SE	mcffs-2026-8.pdf	https://www.mcf.se/contentassets/bf5f875837754fecaf5627012e1762ce/mcffs-2026-8.pdf	raportowanie incydentow
+SE	mcffs-2026-11.pdf	https://www.mcf.se/contentassets/5bf554ffb4404abc99467124edead886/mcffs-2026-11.pdf	srodki bezpieczenstwa; wylacza podmioty objete rozporzadzeniem 2024/2690 spod katalogu krajowego
+SE	mcffs-2026-12.pdf	https://www.mcf.se/contentassets/6ece72fbb2684346a837afada4844bfa/mcffs-2026-12.pdf	audyt bezpieczenstwa
+SK	zakon-69-2018-zz.pdf	https://www.slov-lex.sk/ezbierky/pravne-predpisy/SK/ZZ/2018/69/	wydruk urzedowego HTML do PDF (skrypty/pobierz-ustawy.py, 16.09.2026); obok .html z trescia strony; brzmienie po zakone 366/2024
+SK	vyhlaska-226-2025-zz.pdf	https://www.slov-lex.sk/ezbierky/pravne-predpisy/SK/ZZ/2025/226/	wydruk urzedowego HTML do PDF (skrypty/pobierz-ustawy.py, 16.09.2026); obok .html z trescia strony
+SK	vyhlaska-227-2025-zz.pdf	https://www.slov-lex.sk/ezbierky/pravne-predpisy/SK/ZZ/2025/227/	wydruk urzedowego HTML do PDF (skrypty/pobierz-ustawy.py, 16.09.2026); obok .html z trescia strony
+BE	cyfun-2025-basic-en.pdf	https://atwork.safeonweb.be/sites/default/files/2026-06/CyFun2025_Booklet_BASIC_E.pdf	pobrane Chrome z widocznym oknem (python skrypty/pobierz-ustawy.py --okno); Akamai odrzuca sesje bez okna; tresc wymogow technicznych, do ktorych odsyla ustawa
+BE	cyfun-2025-important-en.pdf	https://atwork.safeonweb.be/sites/default/files/2026-06/CyFun2025_Booklet_Important_E_0.pdf	pobrane Chrome z widocznym oknem (python skrypty/pobierz-ustawy.py --okno); Akamai odrzuca sesje bez okna
+BE	cyfun-2025-essential-en.pdf	https://atwork.safeonweb.be/sites/default/files/2026-06/CyFun2025_Booklet_Essential_E_0.pdf	pobrane Chrome z widocznym oknem (python skrypty/pobierz-ustawy.py --okno); Akamai odrzuca sesje bez okna
+BE	cyfun-2023-small-en.pdf	https://atwork.safeonweb.be/sites/default/files/2025-10/CCB_CyFun2023_Booklet-SMALL_E%20%5BLR-web%5D.pdf	pobrane Chrome z widocznym oknem (python skrypty/pobierz-ustawy.py --okno); Akamai odrzuca sesje bez okna; poziom Small niezmieniony w 2025, CyFun 2023 i 2025 obowiazuja rownolegle do 18.04.2027
+BE	cyfun-2025-key-measures-en.pdf	https://cyfun.eu/sites/default/files/2026-03/CyFun2025-Key_Measures_EN.pdf	pobrane Chrome z widocznym oknem (python skrypty/pobierz-ustawy.py --okno); Akamai odrzuca sesje bez okna
+IT	determinazione-acn-379907-2025.pdf	https://www.acn.gov.it/portale/documents/d/guest/detacn_obblighi_2511-v3_signed	nowsza determinazione ACN niz 164179/2025; zalaczniki 1-4 ponizej
+IT	acn-allegato-1-srodki-podmioty-wazne.pdf	https://www.acn.gov.it/portale/documents/d/guest/allegato-1-v2	srodki bezpieczenstwa, podmioty wazne
+IT	acn-allegato-2-srodki-podmioty-kluczowe.pdf	https://www.acn.gov.it/portale/documents/d/guest/allegato-2-v2	srodki bezpieczenstwa, podmioty kluczowe
+IT	acn-allegato-3-incydenty-podmioty-wazne.pdf	https://www.acn.gov.it/portale/documents/d/guest/allegato-3-v2	incydenty istotne, podmioty wazne
+IT	acn-allegato-4-incydenty-podmioty-kluczowe.pdf	https://www.acn.gov.it/portale/documents/d/guest/allegato-4-v2	incydenty istotne, podmioty kluczowe
+IT	acn-specyfikacje-podmioty-wazne.xlsx	https://www.acn.gov.it/portale/documents/d/guest/modalita-e-specifiche-di-base-nis-soggetti-importanti	te same wymogi w arkuszu - pozycja po pozycji
+IT	acn-specyfikacje-podmioty-kluczowe.xlsx	https://www.acn.gov.it/portale/documents/d/guest/modalita-e-specifiche-di-base-nis-soggetti-essenziali	
+IT	acn-guida-alla-lettura.pdf	https://www.acn.gov.it/portale/documents/d/guest/guida-alla-lettura-specifiche-di-base	przewodnik po specyfikacjach
+FI	traficom-zalecenie-dla-organow-nis.pdf	https://www.traficom.fi/files/media/file/Suositus%20NIS-valvoville%20viranomaisille%20kyberturvallisuuden%20riskienhallinnan%20toimenpiteist%C3%A4.pdf	Finlandia nie wydala wiazacych okreslen technicznych; to zalecenie Traficomu dla organow sektorowych
+RO	legea-124-2025-zatwierdzenie-oug-155.pdf	https://legislatie.just.ro/Public/DetaliiDocument/299675	migawka Archiwum Internetowego (skrypty/pobierz-ustawy.py); legislatie.just.ro odcina ruch zagraniczny, archiwum ma ten sam tekst urzedowy; M.Of. 638 z 7.07.2025 — zatwierdza OUG 155/2024 ZE ZMIANAMI
+RO	oug-155-2024-tekst.pdf	https://legislatie.just.ro/Public/DetaliiDocument/293121	migawka Archiwum Internetowego (skrypty/pobierz-ustawy.py); legislatie.just.ro odcina ruch zagraniczny, archiwum ma ten sam tekst urzedowy; tekst ujednolicony po Legea 124/2025; M.Of. 1332 z 31.12.2024 (wg EUR-Lex NIM)
+RO	ordin-dnsc-1-2025-rejestracja.pdf	https://legislatie.just.ro/Public/DetaliiDocument/301473	migawka Archiwum Internetowego (skrypty/pobierz-ustawy.py); legislatie.just.ro odcina ruch zagraniczny, archiwum ma ten sam tekst urzedowy; ORDIN 1 z 11.08.2025, zgloszenie do rejestracji
+RO	ordin-1-2025-anexa-1-wymogi-zgloszenia.pdf	https://legislatie.just.ro/Public/DetaliiDocument/301474	migawka Archiwum Internetowego (skrypty/pobierz-ustawy.py); legislatie.just.ro odcina ruch zagraniczny, archiwum ma ten sam tekst urzedowy; zalacznik z trescia wymogow zgloszeniowych
+RO	ordin-dnsc-2-2025-progi-i-ryzyko.pdf	https://legislatie.just.ro/Public/DetaliiDocument/301475	migawka Archiwum Internetowego (skrypty/pobierz-ustawy.py); legislatie.just.ro odcina ruch zagraniczny, archiwum ma ten sam tekst urzedowy; ORDIN 2 z 11.08.2025, M.Of. 776 z 20.08.2025
+RO	ordin-dnsc-3-2025-nadzor-i-kontrola.pdf	https://legislatie.just.ro/Public/DetaliiDocument/305128	migawka Archiwum Internetowego (skrypty/pobierz-ustawy.py); legislatie.just.ro odcina ruch zagraniczny, archiwum ma ten sam tekst urzedowy; ORDIN 3 z 27.11.2025, nadzor i kontrola
+RO	ordin-3-2025-anexa-1-normy-nadzoru.pdf	https://legislatie.just.ro/Public/DetaliiDocument/305129	migawka Archiwum Internetowego (skrypty/pobierz-ustawy.py); legislatie.just.ro odcina ruch zagraniczny, archiwum ma ten sam tekst urzedowy; normy nadzoru, weryfikacji i kontroli
+RO	ordin-3-2025-anexa-2-metodyka-priorytetyzacji.pdf	https://legislatie.just.ro/Public/DetaliiDocument/305130	migawka Archiwum Internetowego (skrypty/pobierz-ustawy.py); legislatie.just.ro odcina ruch zagraniczny, archiwum ma ten sam tekst urzedowy; metodyka priorytetyzacji na podstawie ryzyka

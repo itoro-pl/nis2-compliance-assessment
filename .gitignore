@@ -1,0 +1,16 @@
+# Podglad README skladany lokalnie (skrypty/podglad-readme.py)
+_podglad-*.html
+
+# Pliki systemowe
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Edytory
+.vscode/
+.idea/
+*.swp
+*~
+
+# Lokalne
+*.local

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lista zmian — Ocena zgodności z dyrektywą NIS 2</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="obrazy/itoro-logo.svg" type="image/svg+xml">
+<style>
+/* ==========================================================
+   Lista zmian jako strona HTML, nie plik .md.
+   Powód jest prozaiczny: przeglądarki serwują pliki markdown
+   jako czysty tekst bez deklaracji kodowania, więc polskie
+   znaki rozsypywały się przy otwarciu z serwera.
+   ========================================================== */
+:root {
+    --marka: #B72343;
+    --tlo: #f6f5f6;
+    --karta: #fff;
+    --tekst: #1c191c;
+    --tekst-2: #656b72;
+    --linia: rgba(25, 22, 25, .12);
+    --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --marka: #ef5a78; --tlo: #161417; --karta: #1e1b21;
+        --tekst: #ece9ee; --tekst-2: #b6afba; --linia: rgba(226, 220, 226, .18);
+    }
+}
+*, *::before, *::after { box-sizing: border-box; }
+body {
+    margin: 0; background: var(--tlo); color: var(--tekst);
+    font-family: var(--font); font-size: 16px; line-height: 1.6;
+}
+a { color: var(--marka); }
+.gora { background: #191619; border-bottom: 3px solid #B72343; padding: .8rem 0; }
+/* Ta sama szerokość co narzędzie — lista zmian nie ma powodu być węższa. */
+.srodek { width: min(1180px, 100% - 3rem); margin-inline: auto; }
+.gora-tresc { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.gora img { width: 104px; height: auto; display: block; }
+.gora a { color: rgba(255,255,255,.86); text-decoration: none; font-size: .88rem; }
+.gora a:hover { color: #fff; text-decoration: underline; }
+
+h1 { font-size: clamp(1.7rem, 4vw, 2.3rem); letter-spacing: -.02em; margin: 2rem 0 .4rem; }
+.wprowadzenie { color: var(--tekst-2); margin: 0 0 2rem; }
+
+.wydanie {
+    background: var(--karta); border: 1px solid var(--linia);
+    border-left: 4px solid var(--marka); border-radius: 0 12px 12px 0;
+    padding: 1.3rem 1.5rem; margin-bottom: 1.25rem;
+}
+.wydanie-naglowek { display: flex; flex-wrap: wrap; align-items: baseline; gap: .75rem; margin-bottom: .3rem; }
+.wydanie-numer { font-size: 1.35rem; font-weight: 700; letter-spacing: -.01em; }
+.wydanie-data { font-size: .85rem; color: var(--tekst-2); }
+.wydanie-plakietka {
+    margin-left: auto; font-size: .7rem; font-weight: 700; letter-spacing: .06em;
+    text-transform: uppercase; background: #B72343; color: #fff;
+    padding: .18rem .55rem; border-radius: 20px;
+}
+.wydanie-opis { margin: 0 0 1rem; color: var(--tekst-2); font-size: .93rem; }
+
+.zmiany { list-style: none; margin: 0; padding: 0; }
+.zmiany li {
+    position: relative; padding-left: 1.2rem; margin-bottom: .55rem;
+    font-size: .95rem; line-height: 1.55;
+}
+.zmiany li::before {
+    content: ""; position: absolute; left: 0; top: .6em;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--marka);
+}
+.zmiany strong { font-weight: 600; }
+.zmiany span { color: var(--tekst-2); }
+
+.stopka {
+    margin: 2.5rem 0 3rem; padding-top: 1.2rem;
+    border-top: 1px solid var(--linia);
+    font-size: .84rem; color: var(--tekst-2);
+}
+.stopka p { margin: 0 0 .4rem; }
+:where(a, button):focus-visible { outline: 3px solid var(--marka); outline-offset: 2px; }
+
+/* Przełącznik języka: dwie wersje tej samej listy, nie dwie strony —
+   adres pozostaje jeden, więc odsyłacze z narzędzia nie wymagają zmian. */
+.jezyki { margin-left: auto; display: flex; gap: .3rem; }
+.jezyki button {
+    font: inherit; font-size: .84rem; padding: .25rem .7rem; border-radius: 6px;
+    border: 1px solid var(--linia); background: transparent; color: var(--tekst-2); cursor: pointer;
+}
+.jezyki button[aria-pressed="true"] { background: var(--marka); border-color: var(--marka); color: #fff; }
+</style>
+</head>
+<body>
+
+<header class="gora">
+  <div class="srodek gora-tresc">
+    <a href="index.html" aria-label="Wróć do narzędzia"><img src="obrazy/itoro-logo.svg" alt="ITORO"></a>
+    <a href="index.html" id="powrot">← Wróć do narzędzia</a>
+    <div class="jezyki" role="group" aria-label="Język / Language">
+      <button type="button" data-jezyk="pl" lang="pl">Polski</button>
+      <button type="button" data-jezyk="en" lang="en">English</button>
+    </div>
+  </div>
+</header>
+
+<main class="srodek">
+  <h1 id="tytulStrony">Lista zmian</h1>
+  <p class="wprowadzenie" id="wprowadzenie">
+    Ocena zgodności z dyrektywą NIS 2 i prawem krajowym państw członkowskich. Numeracja według wersjonowania semantycznego: zmiana pierwszej liczby oznacza przebudowę wymagającą uwagi, drugiej — nową funkcję albo nowe wymagania prawne, trzeciej — naprawę błędu. Zmiany wynikające z nowelizacji przepisów odnotowujemy z podstawą prawną.
+  </p>
+
+<!-- zmiany:start -->
+  <section class="wydanie">
+    <div class="wydanie-naglowek">
+      <span class="wydanie-numer">1.2.0</span>
+      <span class="wydanie-data">6 października 2026</span>
+      <span class="wydanie-plakietka">aktualna</span>
+    </div>
+    <p class="wydanie-opis">Pierwsze wydanie publiczne.</p>
+    <ul class="zmiany">
+      <li><strong>Brama aktów krajowych</strong> <span>— tests/akty_krajowe.py sprawdza dla wszystkich 27 państw, że akt wdrażający stoi na stronie startowej, nad raportem i na kaflu strony wejściowej, że plik leży w katalogu swojego państwa i ma wiersz w manifeście, oraz że nigdzie nie pojawia się akt innego państwa. Przy okazji manifest dostał wiersze dla dwóch litewskich plików PDF złożonych z DOCX.</span></li>
+      <li><strong>Moduł krajowy nie zastępuje warstwy wspólnej</strong> <span>— rozporządzenie (UE) 2024/2690 stosuje się bezpośrednio we wszystkich państwach, więc polski podmiot odpowiada na pytania z prawa krajowego i z warstwy wspólnej. Kafel Polski mówiący samo „prawo krajowe" czytał się tak, jakby jedno wykluczało drugie.</span></li>
+      <li><strong>Kafel państwa nazywa jego ustawę</strong> <span>— na stronie wejściowej przy każdym państwie stoi akt wdrażający NIS 2 w brzmieniu urzędowym. Wcześniej kafel mówił tylko, według czego biegnie ocena, przez co wyglądało to tak, jakby znane nam było wyłącznie prawo polskie. Państwa, które jeszcze nie wdrożyły dyrektywy, odróżniają się teraz od tych, których ustawę mamy i dołączamy.</span></li>
+      <li><strong>Raport poglądowy dla każdego państwa, w jego języku</strong> <span>— 28 gotowych plików PDF w katalogu przyklady/: po jednym dla każdego z 27 państw plus polski raport po angielsku. Dane są w całości fikcyjne, więc widać, co dokładnie niesie gotowy raport, bez wypełniania kwestionariusza.</span></li>
+      <li><strong>Opis wydania ze zrzutami i zakresem prawa państwo po państwie</strong> <span>— README po polsku i po angielsku, z przebiegiem oceny krok po kroku i tabelą 27 państw: akt wdrażający w brzmieniu urzędowym, liczba dołączonych tekstów, warstwa oceny i odsyłacz do raportu poglądowego. Tabelę buduje skrypt z danych narzędzia, a brama sprawdza, że żaden odsyłacz nie prowadzi donikąd.</span></li>
+      <li><strong>Wydruk i raport bez polskich śladów poza Polską</strong> <span>— stopka wydruku szła z arkusza stylów po polsku i powoływała się na ustawę o KSC w każdym państwie; teraz jest w języku interfejsu. Nad raportem stoi akt wdrażający wybranego państwa — wydruk pokazuje sam raport, a dokument dla zarządu musi nazywać prawo, które wiąże podmiot. Poprawiony też kontrast plakietek przy pytaniach: białe litery nazwy aktu zostawały na jasnym tle.</span></li>
+      <li><strong>Teksty aktów wdrażających NIS 2 z 23 państw</strong> <span>— 73 pliki wraz z manifestem, który dla każdego podaje adres źródłowy i sposób pozyskania. Dla państw publikujących prawo wyłącznie jako aplikację przeglądarkową (Czechy, Estonia, Litwa, Łotwa, Słowacja, Szwecja, Węgry, Belgia, Chorwacja, Włochy, Rumunia) plik jest wydrukiem urzędowego HTML, a odsyłacz prowadzi do źródła urzędowego.</span></li>
+      <li><strong>Każde państwo widzi swój akt wdrażający</strong> <span>— na liście podstaw prawnych stoi akt krajowy danego państwa, w brzmieniu urzędowym i z odsyłaczem do źródła, wraz ze zdaniem mówiącym wprost, że jego wymogów moduł wspólny jeszcze nie ocenia. Polskie rejestry i polskie pola identyfikacyjne znikają poza modułem krajowym.</span></li>
+      <li><strong>Strona wejściowa po angielsku, gdy języka nie da się przypisać do państwa</strong> <span>— przeglądarka po angielsku bez regionu unijnego nie dostaje zgadywanego państwa: widzi listę 27 państw i wybiera sama. Wersja statyczna (bez JavaScriptu, dla robotów wyszukiwarek) jest angielska.</span></li>
+      <li><strong>Czytelniejsze odesłania do przepisów</strong> <span>— plakietki mają jednakową wysokość i stoją równo w kolumnie, a nazwa aktu jest tylko na etykiecie: „ustawa o KSC · art. 7c ust. 1” zamiast powtarzania nazwy w treści. Pełne odesłanie pozostaje w podpowiedzi.</span></li>
+      <li><strong>Dostępność i spójność wizualna</strong> <span>— zero naruszeń WCAG 2.1 AA w obu motywach (sprawdzane automatem przy każdej zmianie), cztery stopnie pisma zamiast dziewiętnastu, kolory oceny osobno dobrane dla motywu jasnego i ciemnego.</span></li>
+      <li><strong>Licencja i paczka publiczna</strong> <span>— kod na AGPL-3.0, treść merytoryczna na CC BY-SA 4.0; teksty aktów prawnych i biblioteki zewnętrzne poza licencją repozytorium (plik NOTICE).</span></li>
+    </ul>
+  </section>
+
+  <section class="wydanie">
+    <div class="wydanie-naglowek">
+      <span class="wydanie-numer">1.1.0</span>
+      <span class="wydanie-data">16 września 2026</span>
+    </div>
+    <p class="wydanie-opis">Rozszerzenie na wszystkie państwa członkowskie Unii Europejskiej.</p>
+    <ul class="zmiany">
+      <li><strong>Wybór państwa i języka</strong> <span>— 27 państw członkowskich i 24 języki urzędowe UE, niezależnie od siebie; języki urzędowe wybranego państwa na początku listy. Wybór zapamiętywany w przeglądarce i w adresie (<code>?panstwo=DE&amp;jezyk=de</code>).</span></li>
+      <li><strong>Moduł wspólny dla państw bez modułu prawa krajowego</strong> <span>— ocena według bezpośrednio stosowanego rozporządzenia (UE) 2024/2690 i obowiązków wynikających wprost z dyrektywy (UE) 2022/2555: status podmiotu, pułapy kar z art. 34, terminy, obowiązki organu zarządzającego, katalog środków z art. 21 ust. 2.</span></li>
+      <li><strong>Treść rozporządzenia 2024/2690 w języku interfejsu</strong> <span>— urzędowe wersje z EUR-Lex; odesłania do przepisów składane w konwencji danego języka (np. „Article 21(2)(c)”, „Artikel 21 Absatz 2 Buchstabe c”, „άρθρο 21 παράγραφος 2 στοιχείο γ)”).</span></li>
+      <li><strong>Nakładki regionalne</strong> <span>— terminologia austriacka (de-AT), belgijska (nl-BE, fr-BE), luksemburska (fr-LU), fińsko-szwedzka (sv-FI) i cypryjska (el-CY) oraz formatowanie dat i liczb według państwa.</span></li>
+      <li><strong>Strona startowa w języku gościa</strong> <span>— język i państwo dobierane z ustawień przeglądarki (np. de-AT → Austria, niemiecki), wybór państwa i języka nad przyciskami, lista 27 państw; teksty w 24 językach.</span></li>
+      <li><strong>Raport poglądowy dla każdego państwa</strong> <span>— fikcyjna spółka z nazwą, adresem i formą prawną w konwencji języka modułu (GmbH, s.r.o., S.r.l.…), dostępny z <code>?panstwo=XX&amp;jezyk=yy&amp;przyklad=1</code>.</span></li>
+      <li><strong>Polska ocena bez zmian</strong> <span>— wynik, klasyfikacja i raport dla prawa polskiego są identyczne z wersją 1.0.2 (weryfikacja bajt w bajt przy każdej zmianie).</span></li>
+    </ul>
+  </section>
+
+  <section class="wydanie">
+    <div class="wydanie-naglowek">
+      <span class="wydanie-numer">1.0.2</span>
+      <span class="wydanie-data">2 sierpnia 2026</span>
+    </div>
+    <p class="wydanie-opis">Naprawa wyświetlania terminów, które już obowiązują.</p>
+    <ul class="zmiany">
+      <li><strong>Terminy już obowiązujące w podsumowaniu dla zarządu</strong> <span>— przepis, którego data wejścia w życie minęła, nie jest już pokazywany jako „za −X dni”. Lista „Najbliższe terminy ustawowe” pokazuje wyłącznie terminy jeszcze przed nami.</span></li>
+      <li><strong>Kalendarz ustawowy</strong> <span>— przepis w mocy oznaczany jest jako „obowiązuje” zamiast ujemnej liczby dni, spójnie z resztą raportu.</span></li>
+    </ul>
+  </section>
+
+  <section class="wydanie">
+    <div class="wydanie-naglowek">
+      <span class="wydanie-numer">1.0.1</span>
+      <span class="wydanie-data">22 lipca 2026</span>
+    </div>
+    <p class="wydanie-opis">Rozbudowa o materiał urzędowy i porządki w obsłudze.</p>
+    <ul class="zmiany">
+      <li><strong>Najczęściej zadawane pytania</strong> <span>— stanowisko Ministerstwa Cyfryzacji przy właściwych obszarach oceny i na ekranie startowym.</span></li>
+      <li><strong>System S46 i wykaz podmiotów</strong> <span>— kroki rejestracji, dane do wniosku i odsyłacze wprost do systemu. Narzędzie rozpoznaje, kto jest wpisywany z urzędu.</span></li>
+      <li><strong>Poprawiony kalkulator kar</strong> <span>— obok pułapu widać wariant procentowy i limit kwotowy, a osobny opis tłumaczy, że pułap wyznacza ustawa, a kwotę w jego granicach ustala organ.</span></li>
+      <li><strong>Poprawiona nawigacja</strong> <span>— koniec ślepego zaułka na profilu, widoczne kolejne kroki, stała lista brakujących pól.</span></li>
+      <li><strong>Klikalne podstawy prawne</strong> <span>— każde odesłanie otwiera przepis na właściwej stronie dokumentu.</span></li>
+      <li><strong>Nowe terminy urzędowe</strong> <span>— uruchomienie wykazu, okno wpisów z urzędu, start samorejestracji i udostępnienie S46.</span></li>
+      <li><strong>Rozróżnienie obowiązywania i terminu</strong> <span>— przepis już obowiązujący nie jest opisywany jako termin przekroczony.</span></li>
+      <li><strong>Raport poglądowy</strong> <span>— gotowa ocena na danych fikcyjnej spółki, bez wypełniania kwestionariusza.</span></li>
+      <li><strong>Sumaryczny czas oceny</strong> <span>— przy wyborze modułów widać łączny czas wypełnienia.</span></li>
+      <li><strong>Przebudowany ekran startowy</strong> <span>— treść w punktach zamiast bloków tekstu.</span></li>
+      <li><strong>Zadania kierownictwa jako lista</strong> <span>— zamiast dwóch kolorowych kolumn dwie listy jedna pod drugą: najpierw obowiązki niezbywalne, potem te do powierzenia zespołowi.</span></li>
+      <li><strong>Pełna szerokość treści</strong> <span>— lista zmian, treść pytań i ramki pomocy wykorzystują całą kolumnę.</span></li>
+      <li><strong>Dostępność</strong> <span>— etykiety pól, obsługa klawiaturą, kontrast zgodny z WCAG AA w obu motywach.</span></li>
+      <li><strong>Poprawiona nazwa narzędzia</strong> <span>— ocenie podlega zgodność z ustawą o KSC, która wdraża dyrektywę NIS 2. Dyrektywa wiąże państwo członkowskie, nie podmiot, więc „zgodność z NIS 2” byłaby zdaniem nieścisłym.</span></li>
+      <li><strong>Lista zmian w HTML</strong> <span>— zamiast pliku markdown, który gubił polskie znaki.</span></li>
+    </ul>
+  </section>
+
+  <section class="wydanie">
+    <div class="wydanie-naglowek">
+      <span class="wydanie-numer">1.0.0</span>
+      <span class="wydanie-data">21 lipca 2026</span>
+    </div>
+    <ul class="zmiany">
+      <li><strong>Uruchomienie narzędzia.</strong></li>
+    </ul>
+  </section>
+<!-- zmiany:end -->
+
+  <footer class="stopka">
+    <p id="stopkaOpis">
+      Ocena zgodności z dyrektywą (UE) 2022/2555 (NIS 2), rozporządzeniem wykonawczym Komisji (UE) 2024/2690 oraz prawem krajowym państwa wybranego w narzędziu. Nie stanowi opinii prawnej.
+    </p>
+    <p><a href="index.html" id="powrotStopka">← Wróć do narzędzia</a></p>
+  </footer>
+</main>
+
+<script src="zmiany-dane.js"></script>
+<script>
+/* Strona statyczna jest polska. Angielski wchodzi, gdy mówi o tym adres
+   (?jezyk=en), zapamiętany wybór z narzędzia albo język przeglądarki —
+   tą samą drogą co w reszcie narzędzia. Treść obu wersji pochodzi
+   z zmiany-dane.js, więc nie ma mowy o rozjechaniu się wersji. */
+(function () {
+    const KLUCZ_WYBORU = 'ocena_wybor';
+
+    function wykryj() {
+        const par = new URLSearchParams(location.search);
+        const zAdresu = (par.get('jezyk') || '').toLowerCase().split('-')[0];
+        if (zAdresu) return zAdresu === 'pl' ? 'pl' : 'en';
+        try {
+            const zapisany = JSON.parse(localStorage.getItem(KLUCZ_WYBORU) || '{}');
+            if (zapisany.jezyk) return zapisany.jezyk.toLowerCase().startsWith('pl') ? 'pl' : 'en';
+        } catch (e) {}
+        const tagi = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ''];
+        return String(tagi[0]).toLowerCase().startsWith('pl') ? 'pl' : 'en';
+    }
+
+    function wydanieHtml(w, jezyk) {
+        const plakietka = w.aktualna ? '<span class="wydanie-plakietka">' + ZMIANY.aktualna[jezyk] + '</span>' : '';
+        const opis = w.opis ? '<p class="wydanie-opis">' + w.opis[jezyk] + '</p>' : '';
+        const pozycje = w.pozycje.map(p => '<li><strong>' + p.tytul[jezyk] + '</strong>'
+            + (p.tresc[jezyk] ? ' <span>' + p.tresc[jezyk] + '</span>' : '') + '</li>').join('');
+        return '<section class="wydanie"><div class="wydanie-naglowek">'
+            + '<span class="wydanie-numer">' + w.numer + '</span>'
+            + '<span class="wydanie-data">' + w.data[jezyk] + '</span>' + plakietka
+            + '</div>' + opis + '<ul class="zmiany">' + pozycje + '</ul></section>';
+    }
+
+    function pokaz(jezyk) {
+        document.documentElement.lang = jezyk;
+        document.title = ZMIANY.tytul[jezyk] + (jezyk === 'pl'
+            ? ' — Ocena zgodności z dyrektywą NIS 2' : ' — NIS 2 Directive compliance assessment');
+        document.getElementById('tytulStrony').textContent = ZMIANY.tytul[jezyk];
+        document.getElementById('wprowadzenie').textContent = ZMIANY.wprowadzenie[jezyk];
+        document.getElementById('stopkaOpis').textContent = ZMIANY.stopka[jezyk];
+        document.getElementById('powrot').textContent = ZMIANY.powrot[jezyk];
+        document.getElementById('powrotStopka').textContent = ZMIANY.powrot[jezyk];
+        const wydania = ZMIANY.wydania.map(w => wydanieHtml(w, jezyk)).join('');
+        const start = [...document.body.childNodes];
+        const main = document.querySelector('main');
+        const stopka = main.querySelector('.stopka');
+        main.querySelectorAll('.wydanie').forEach(e => e.remove());
+        stopka.insertAdjacentHTML('beforebegin', wydania);
+        document.querySelectorAll('.jezyki button').forEach(b =>
+            b.setAttribute('aria-pressed', String(b.dataset.jezyk === jezyk)));
+        void start;
+    }
+
+    document.querySelectorAll('.jezyki button').forEach(b =>
+        b.addEventListener('click', () => pokaz(b.dataset.jezyk)));
+    pokaz(wykryj());
+})();
+</script>
+
+</body>
+</html>

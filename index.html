@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free tools — ITORO</title>
+<meta name="description" content="Free ITORO tools for network operators, data centres and public bodies. NIS 2 compliance self-assessment under the national law of all 27 EU Member States, running in the browser, no account needed.">
+<!-- seo:start -->
+<link rel="canonical" href="https://itoro.com.pl/narzedzia/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ITORO">
+<meta property="og:title" content="NIS 2 compliance assessment — 27 EU Member States, 24 languages">
+<meta property="og:description" content="Free self-assessment against the NIS 2 Directive and national law. Runs in the browser, no account, data stays on your device.">
+<meta property="og:url" content="https://itoro.com.pl/narzedzia/">
+<meta property="og:image" content="https://itoro.com.pl/narzedzia/obrazy/og-ocena-nis2.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="bg" href="https://itoro.com.pl/narzedzia/?jezyk=bg">
+<link rel="alternate" hreflang="cs" href="https://itoro.com.pl/narzedzia/?jezyk=cs">
+<link rel="alternate" hreflang="da" href="https://itoro.com.pl/narzedzia/?jezyk=da">
+<link rel="alternate" hreflang="de" href="https://itoro.com.pl/narzedzia/?jezyk=de">
+<link rel="alternate" hreflang="el" href="https://itoro.com.pl/narzedzia/?jezyk=el">
+<link rel="alternate" hreflang="en" href="https://itoro.com.pl/narzedzia/?jezyk=en">
+<link rel="alternate" hreflang="es" href="https://itoro.com.pl/narzedzia/?jezyk=es">
+<link rel="alternate" hreflang="et" href="https://itoro.com.pl/narzedzia/?jezyk=et">
+<link rel="alternate" hreflang="fi" href="https://itoro.com.pl/narzedzia/?jezyk=fi">
+<link rel="alternate" hreflang="fr" href="https://itoro.com.pl/narzedzia/?jezyk=fr">
+<link rel="alternate" hreflang="ga" href="https://itoro.com.pl/narzedzia/?jezyk=ga">
+<link rel="alternate" hreflang="hr" href="https://itoro.com.pl/narzedzia/?jezyk=hr">
+<link rel="alternate" hreflang="hu" href="https://itoro.com.pl/narzedzia/?jezyk=hu">
+<link rel="alternate" hreflang="it" href="https://itoro.com.pl/narzedzia/?jezyk=it">
+<link rel="alternate" hreflang="lt" href="https://itoro.com.pl/narzedzia/?jezyk=lt">
+<link rel="alternate" hreflang="lv" href="https://itoro.com.pl/narzedzia/?jezyk=lv">
+<link rel="alternate" hreflang="mt" href="https://itoro.com.pl/narzedzia/?jezyk=mt">
+<link rel="alternate" hreflang="nl" href="https://itoro.com.pl/narzedzia/?jezyk=nl">
+<link rel="alternate" hreflang="pl" href="https://itoro.com.pl/narzedzia/?jezyk=pl">
+<link rel="alternate" hreflang="pt" href="https://itoro.com.pl/narzedzia/?jezyk=pt">
+<link rel="alternate" hreflang="ro" href="https://itoro.com.pl/narzedzia/?jezyk=ro">
+<link rel="alternate" hreflang="sk" href="https://itoro.com.pl/narzedzia/?jezyk=sk">
+<link rel="alternate" hreflang="sl" href="https://itoro.com.pl/narzedzia/?jezyk=sl">
+<link rel="alternate" hreflang="sv" href="https://itoro.com.pl/narzedzia/?jezyk=sv">
+<link rel="alternate" hreflang="x-default" href="https://itoro.com.pl/narzedzia/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "NIS 2 compliance assessment",
+  "alternateName": "Ocena zgodności z NIS 2",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web browser",
+  "url": "https://itoro.com.pl/narzedzia/",
+  "softwareVersion": "1.2.0",
+  "inLanguage": [
+    "bg",
+    "cs",
+    "da",
+    "de",
+    "el",
+    "en",
+    "es",
+    "et",
+    "fi",
+    "fr",
+    "ga",
+    "hr",
+    "hu",
+    "it",
+    "lt",
+    "lv",
+    "mt",
+    "nl",
+    "pl",
+    "pt",
+    "ro",
+    "sk",
+    "sl",
+    "sv"
+  ],
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "EUR"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "ITORO",
+    "url": "https://itoro.com.pl"
+  },
+  "description": "Free NIS 2 compliance self-assessment for all 27 EU Member States, in the 24 official EU languages. Runs entirely in the browser — no account, no server, no data leaving the device."
+}
+</script>
+<!-- seo:end -->
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+<link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#191619">
+<style>
+/* ==========================================================
+   ITORO — Darmowe narzędzia
+   Kolorystyka i typografia zgodne z narzędziami, żeby przejście
+   ze strony do aplikacji nie wyglądało na opuszczenie serwisu.
+   Bez zewnętrznych zasobów: żadnych czcionek z CDN ani obcych skryptów.
+   Skrypty są własne: landing/landing.js dobiera język i państwo do
+   gościa (języki przeglądarki) i podmienia teksty ze słownika
+   landing/napisy/<język>.js; statyczna treść poniżej jest angielską
+   wersją bez wybranego państwa, generowaną przez skrypty/landing.py
+   (nie edytować tekstów ręcznie). Skrypt na końcu składa adres poczty.
+
+   Układ podporządkowany jednemu warunkowi: na Full HD narzędzie
+   i informacja o ITORO mają być widoczne bez przewijania. Stąd
+   nagłówek w dwóch kolumnach i pas z kartami wsunięty pod niego.
+   ========================================================== */
+:root {
+    --marka: #B72343;
+    /* Cztery stopnie pisma, te same co w narzędziu. */
+    --f-drobny: .75rem;
+    --f-pomocniczy: .875rem;
+    --f-tekst: 1rem;
+    --f-naglowek: 1.5rem;
+    --marka-ciemna: #8E1A34;
+    --marka-jasna: #fdeef1;
+    --noc: #191619;
+    --noc-2: #241f24;
+    --tlo: #f6f5f6;
+    --karta: #ffffff;
+    --tekst: #1c191c;
+    --tekst-2: #656b72;
+    --linia: rgba(25, 22, 25, .12);
+    --cien: 0 1px 2px rgba(25, 22, 25, .05), 0 8px 24px rgba(25, 22, 25, .05);
+    --cien-uniesiony: 0 12px 32px rgba(25, 22, 25, .16);
+    --itoro-tlo: #4a1522;
+    --itoro-tlo-2: #7a2033;
+    --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --marka: #ef5a78;
+        --marka-jasna: #332026;
+        --tlo: #161417;
+        --karta: #1e1b21;
+        --tekst: #ece9ee;
+        --tekst-2: #b6afba;
+        --linia: rgba(226, 220, 226, .18);
+        --cien: 0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px rgba(0, 0, 0, .25);
+        --cien-uniesiony: 0 12px 32px rgba(0, 0, 0, .5);
+
+        /* W motywie jasnym ciemny nagłówek jest kontrastem wobec strony.
+           W ciemnym byłby trzecią czernią obok tła i kart — zamiast
+           porządkować, rysowałby szew w poprzek ekranu. */
+        --noc: var(--tlo);
+        --noc-2: #26222b;
+    }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body {
+    margin: 0; font-family: var(--font); font-size: 16px; line-height: 1.6;
+    background: var(--tlo); color: var(--tekst);
+    -webkit-font-smoothing: antialiased;
+}
+a { color: var(--marka); }
+img { max-width: 100%; display: block; }
+
+.srodek { width: min(1320px, 100% - 3rem); margin-inline: auto; }
+@media (max-width: 560px) { .srodek { width: min(1320px, 100% - 2rem); } }
+
+/* Odnośnik pomijający nawigację, ujawniany dopiero tabulatorem. */
+.pomin-nawigacje {
+    position: absolute; left: .5rem; top: -3rem; z-index: 50;
+    background: #B72343; color: #fff; font-weight: 600; text-decoration: none;
+    padding: .55rem 1rem; border-radius: 0 0 8px 8px; transition: top .15s;
+}
+.pomin-nawigacje:focus { top: 0; }
+
+/* ── PASEK GÓRNY ───────────────────────────────────────────
+   Ta sama ciemna neutrala i ta sama karmazynowa linia, co w pasku
+   narzędzia — przejście dalej ma być bezszwowe. */
+.gora {
+    background: var(--noc); border-bottom: 3px solid #B72343;
+    padding: .7rem 0;
+}
+.gora-tresc { display: flex; align-items: center; gap: 1.25rem; }
+.gora-opis {
+    flex: 1 1 auto; min-width: 0; margin: 0;
+    color: rgba(255,255,255,.88); font-size: var(--f-tekst); font-weight: 500;
+    line-height: 1.3; letter-spacing: -.005em;
+}
+@media (max-width: 1200px) { .gora-opis { font-size: var(--f-tekst); } }
+.gora-kontakt { display: flex; align-items: center; gap: .55rem; flex-shrink: 0; }
+.gora-link { color: rgba(255,255,255,.86); text-decoration: none; font-size: var(--f-pomocniczy); white-space: nowrap; }
+.gora-link:hover { color: #fff; text-decoration: underline; }
+.gora-kreska { color: rgba(255,255,255,.55); font-size: var(--f-pomocniczy); }
+.gora-kontakt .gora-link { font-size: var(--f-pomocniczy); }
+@media (max-width: 620px) {
+    .gora-kontakt { gap: .4rem; }
+    .gora-kontakt .gora-link { font-size: var(--f-drobny); }
+}
+.logo { width: 104px; height: auto; flex-shrink: 0; }
+@media (max-width: 860px) { .gora-opis { display: none; } .gora-tresc { justify-content: space-between; } }
+
+/* ── NAGŁÓWEK ──────────────────────────────────────────────
+   Tytuł na pełną szerokość, pod nim dwie kolumny: po lewej powód,
+   dla którego zarząd ma to przeczytać, po prawej domknięcie myśli.
+   Układ obok siebie zamiast jedno pod drugim skraca nagłówek o połowę
+   i zostawia karty nad krawędzią ekranu. */
+.hero { background: var(--noc); color: #fff; padding: 1.9rem 0 2.6rem; }
+.nadtytul {
+    font-size: var(--f-drobny); font-weight: 700; letter-spacing: .16em;
+    text-transform: uppercase; color: #e8879a; margin: 0 0 .75rem;
+}
+.hero h1 {
+    font-size: clamp(2.1rem, 3.4vw, 3.1rem); line-height: 1.06;
+    letter-spacing: -.024em; font-weight: 700; margin: 0 0 .85rem;
+    text-wrap: balance; max-width: 30ch;
+}
+.hero-odpowiedzialnosc {
+    margin: 1.4rem 0 0; max-width: 78ch; font-size: clamp(1rem, 1.2vw, 1.08rem); line-height: 1.62;
+    color: rgba(255,255,255,.82);
+}
+.hero strong { color: #fff; font-weight: 600; }
+
+/* ── PAS KART ──────────────────────────────────────────────
+   Narzędzie i ITORO obok siebie, wsunięte w nagłówek. Przy jednym
+   narzędziu pusty kafel „wkrótce” byłby marnowaniem najlepszego
+   miejsca na stronie — zajmuje je informacja o firmie. */
+.pas { display: grid; gap: 1.5rem; margin: -2.4rem 0 0; align-items: start; grid-template-columns: minmax(0, 1fr); }
+/* minmax(0, 1fr) także w jednej kolumnie: bez tego najdłuższa opcja listy
+   państw rozpychała kartę na telefonie i strona przewijała się w bok. */
+@media (min-width: 1100px) { .pas { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); } }
+
+/* Prawa kolumna trzyma reklamę i akapit pod nią — dzięki temu tekst
+   o pochodzeniu narzędzi wypełnia miejsce, które i tak zostawia
+   krótsza karta ITORO obok wyższej karty narzędzia. */
+.kolumna-prawa { display: flex; flex-direction: column; gap: 1.25rem; }
+.pod-reklama {
+    margin: 0; padding: 0 .3rem; font-size: var(--f-pomocniczy); line-height: 1.6;
+    color: var(--tekst-2);
+}
+
+.karta {
+    background: var(--karta); border: 1px solid var(--linia);
+    border-radius: 14px; box-shadow: var(--cien);
+    padding: 1.5rem 1.7rem 1.6rem;
+    display: flex; flex-direction: column;
+}
+.karta h2 {
+    font-size: var(--f-naglowek); line-height: 1.2; letter-spacing: -.014em;
+    margin: 0 0 .5rem; text-wrap: balance;
+}
+.tytul-dopisek { font-weight: 400; color: var(--tekst-2); white-space: nowrap; }
+.karta .wiodacy { font-size: var(--f-tekst); margin: 0 0 1rem; color: var(--tekst); }
+.karta .drobne { font-size: var(--f-drobny); line-height: 1.45; color: var(--tekst-2); margin: 1rem 0 0; }
+
+/* Karta narzędzia jest w całości klikalna: odsyłacz rozciąga się na
+   cały kafel, a obramowanie, uniesienie i kursor mówią o tym wprost.
+   Sam przycisk zostaje, bo bez niego nie widać, dokąd prowadzi. */
+.karta-narzedzie { position: relative; cursor: pointer; transition: box-shadow .18s, transform .18s; }
+.karta-narzedzie::before {
+    content: ""; position: absolute; inset: -1px; border-radius: 14px;
+    border: 2px solid transparent; pointer-events: none; transition: border-color .18s;
+}
+.karta-narzedzie:hover { box-shadow: var(--cien-uniesiony); transform: translateY(-3px); }
+.karta-narzedzie:hover::before,
+.karta-narzedzie:focus-within::before { border-color: var(--marka); }
+.karta-narzedzie:hover .przycisk { background: var(--marka-ciemna); border-color: var(--marka-ciemna); }
+.karta-narzedzie:hover .strzalka { transform: translateX(3px); }
+
+.plakietki { display: flex; flex-wrap: wrap; gap: .35rem; margin: 0 0 1.1rem; }
+.plakietka {
+    font-size: var(--f-drobny); font-weight: 600; letter-spacing: .01em;
+    color: #fff; padding: .2rem .6rem; border-radius: 20px;
+}
+/* Kolory identyczne jak warstwy wewnątrz narzędzia — to nie ozdoba,
+   tylko ta sama legenda, którą użytkownik zobaczy po kliknięciu. */
+.p-ksc  { background: #1a56db; }
+.p-reg  { background: #0e7490; }
+.p-pke  { background: #c2410c; }
+.p-zal4 { background: #15803d; }
+.p-ue   { background: #4b3fa8; }
+
+.lista { margin: 0 0 1.2rem; padding: 0; list-style: none; }
+.lista li {
+    position: relative; padding-left: 1.3rem; margin-bottom: .35rem;
+    font-size: var(--f-tekst); color: var(--tekst-2);
+}
+.lista li::before {
+    content: ""; position: absolute; left: 0; top: .58em;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--marka);
+}
+.lista strong { color: var(--tekst); font-weight: 600; }
+
+.akcje { margin-top: auto; display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
+.przycisk {
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: #B72343; color: #fff; text-decoration: none;
+    font-weight: 600; font-size: var(--f-tekst); padding: .78rem 1.3rem;
+    border-radius: 9px; border: 1px solid #B72343;
+    transition: background .15s, border-color .15s;
+}
+.przycisk:hover { background: var(--marka-ciemna); border-color: var(--marka-ciemna); }
+.przycisk .strzalka { font-size: var(--f-tekst); line-height: 1; transition: transform .18s; }
+/* Rozciągnięcie odsyłacza na całą kartę — klikalne jest wszystko,
+   ale w drzewie dostępności pozostaje jeden odsyłacz z nazwą. */
+.przycisk-rozciagniety::after { content: ""; position: absolute; inset: 0; border-radius: 14px; }
+/* Drugi odsyłacz w karcie musi stać nad rozciągniętym tłem pierwszego,
+   inaczej klik w „przykładowy raport” otwierałby narzędzie. */
+.przycisk-drugi {
+    background: transparent; color: var(--tekst);
+    border-color: var(--linia); position: relative; z-index: 1;
+}
+.przycisk-drugi:hover { background: var(--marka-jasna); border-color: var(--marka); color: var(--marka); }
+.karta-narzedzie:hover .przycisk-drugi { background: transparent; border-color: var(--linia); color: var(--tekst); }
+.karta-narzedzie:hover .przycisk-drugi:hover { background: var(--marka-jasna); border-color: var(--marka); color: var(--marka); }
+
+.czas { font-size: var(--f-pomocniczy); line-height: 1.5; color: var(--tekst-2); margin: .9rem 0 0; }
+/* Elementy pod rozciągniętym odsyłaczem muszą stać wyżej w stosie,
+   inaczej nie da się kliknąć listy zmian. */
+.wersja { font-size: var(--f-drobny); color: var(--tekst-2); margin: 1rem 0 0; position: relative; z-index: 1; }
+
+/* ── KARTA ITORO ───────────────────────────────────────────
+   Reklama ma się odróżniać od kafelka narzędzia na pierwszy rzut oka,
+   niezależnie od motywu. Kafelek narzędzia jest neutralny — biały albo
+   grafitowy; reklama dostaje własną, karmazynową powierzchnię marki,
+   tę samą w obu motywach. */
+.karta-itoro {
+    background: linear-gradient(158deg, var(--itoro-tlo-2) 0%, var(--itoro-tlo) 55%);
+    color: #fff; border: 0; border-left: 4px solid #B72343;
+    box-shadow: inset 0 0 0 1px rgba(247, 194, 204, .18),
+                0 1px 2px rgba(0,0,0,.3), 0 12px 30px rgba(139, 26, 52, .28);
+}
+.karta-itoro h2 { color: #fff; font-size: var(--f-naglowek); margin-bottom: .7rem; }
+.nadtytul-firmy {
+    font-size: var(--f-drobny); font-weight: 700; letter-spacing: .14em;
+    text-transform: uppercase; color: #f7c2cc; margin: 0 0 .5rem;
+}
+.karta-itoro p { color: rgba(255,255,255,.82); font-size: var(--f-tekst); margin: 0 0 .9rem; }
+.karta-itoro strong { color: #fff; }
+.karta-itoro .lista li { color: rgba(255,255,255,.84); }
+.karta-itoro .lista li::before { background: #f7c2cc; }
+.karta-itoro .lista strong { color: #fff; }
+.karta-itoro .przycisk {
+    background: #fff; border-color: #fff; color: #8E1A34;
+}
+.karta-itoro .przycisk:hover { background: #f4dde2; border-color: #f4dde2; color: #6f1428; }
+
+/* ── PASEK FAKTÓW ──────────────────────────────────────────*/
+.fakty {
+    display: grid; gap: 1.6rem 2.5rem; margin: 3rem 0 0;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+.fakt h3 {
+    font-size: var(--f-drobny); font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--marka); margin: 0 0 .45rem;
+}
+.fakt p { margin: 0; font-size: var(--f-tekst); color: var(--tekst-2); }
+
+/* ── STOPKA ────────────────────────────────────────────────*/
+.stopka {
+    margin-top: 2.8rem; padding: 1.6rem 0 2.4rem;
+    border-top: 1px solid var(--linia);
+    font-size: var(--f-pomocniczy); color: var(--tekst-2);
+}
+.stopka p { margin: 0 0 .4rem; }
+.stopka p:last-child { margin-bottom: 0; }
+
+:where(a, button):focus-visible { outline: 3px solid var(--marka); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+    .karta-narzedzie:hover { transform: none; }
+}
+/* ── PAŃSTWA ───────────────────────────────────────────────
+   Siatka 27 kafli zamiast mapy: mapa przyjdzie osobno, a lista
+   z kodem państwa działa od razu i czyta się na każdej szerokości. */
+.panstwa { margin: 2.5rem 0 0; }
+.panstwa-glowa h2 { font-size: var(--f-naglowek); letter-spacing: -.01em; margin: 0 0 .5rem; }
+.panstwa-glowa p { color: var(--tekst-2); max-width: 78ch; margin: 0 0 1.25rem; font-size: var(--f-tekst); }
+/* Kafel państwa czyta się od góry: kto (kod i nazwy), czym jest związany
+   (akt wdrażający), według czego biegnie ocena (warstwa). Nazwa ustawy
+   stoi na całej szerokości kafla i mieści się w całości — urwana
+   wielokropkiem mówiłaby mniej niż nic, bo akt poznaje się po numerze
+   i roczniku, a te stoją na końcu. Stąd kolumny szersze niż przy samych
+   nazwach państw. */
+.panstwa-siatka {
+    display: grid; gap: .6rem;
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+}
+.panstwo-kafel {
+    display: grid; grid-template-columns: auto 1fr;
+    column-gap: .7rem; row-gap: .3rem; align-items: center; align-content: start;
+    background: var(--karta); border: 1px solid var(--linia); border-radius: 12px;
+    padding: .7rem .9rem .75rem; text-decoration: none; color: var(--tekst);
+    box-shadow: var(--cien); transition: box-shadow .18s, transform .18s, border-color .18s;
+}
+.panstwo-kafel:hover { box-shadow: var(--cien-uniesiony); transform: translateY(-2px); border-color: var(--marka); }
+.panstwo-kod {
+    grid-row: 1; width: 2.4rem; height: 2.4rem; border-radius: 8px;
+    display: grid; place-items: center; font-weight: 700; font-size: var(--f-drobny); letter-spacing: .04em;
+    background: var(--marka-jasna); color: var(--marka);
+}
+.panstwo-nazwy { display: flex; flex-direction: column; line-height: 1.2; min-width: 0; }
+.panstwo-nazwa { font-weight: 600; }
+.panstwo-wlasna { font-size: var(--f-drobny); color: var(--tekst-2); }
+.panstwo-akt {
+    grid-column: 1 / -1; font-size: var(--f-drobny); color: var(--tekst-2);
+    line-height: 1.35; hyphens: auto;
+    border-top: 1px solid var(--linia); padding-top: .45rem;
+}
+.panstwo-stan {
+    grid-column: 1 / -1; font-size: var(--f-drobny); font-weight: 600;
+    letter-spacing: .04em; text-transform: uppercase; color: var(--tekst-2);
+}
+/* Państwo bez ustawy wdrażającej nie ma wiersza z aktem — kreska
+   oddzielająca przechodzi wtedy na etykietę warstwy, żeby kafle
+   zachowały ten sam rysunek. */
+.panstwo-nazwy + .panstwo-stan { border-top: 1px solid var(--linia); padding-top: .45rem; }
+.stan-gotowy .panstwo-stan { color: var(--marka); }
+.stan-gotowy .panstwo-kod { background: var(--marka); color: #fff; }
+/* ── WYBÓR PAŃSTWA I JĘZYKA ────────────────────────────────
+   Dwa pola nad przyciskami: bez nich gość z Niemiec zobaczyłby polską
+   ustawę, a listę państw dopiero po przewinięciu. Pola stoją nad
+   rozciągniętym odsyłaczem karty (z-index), jak przycisk drugi. */
+.wybor { display: flex; flex-wrap: wrap; gap: .75rem 1.25rem; margin: 1.1rem 0 0; position: relative; z-index: 1; }
+.wybor-pole { display: flex; flex-direction: column; gap: .3rem; font-size: var(--f-drobny); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--tekst-2); flex: 1 1 200px; }
+.wybor-pole select {
+    font: inherit; font-size: var(--f-tekst); font-weight: 500; letter-spacing: 0; text-transform: none;
+    color: var(--tekst); background: var(--karta); border: 1px solid var(--linia); border-radius: 9px;
+    padding: .55rem .7rem; min-width: 0; width: 100%; max-width: 100%;
+}
+.wybor-pole select:focus { outline: 2px solid var(--marka); outline-offset: 1px; }
+.wybor-stan { font-size: var(--f-pomocniczy); line-height: 1.5; color: var(--tekst-2); margin: .6rem 0 0; position: relative; z-index: 1; }
+.wybor-stan.stan-gotowy, .wybor-stan.stan-wybierz { color: var(--marka); }
+.panstwo-wybrane { border-color: var(--marka); box-shadow: 0 0 0 2px var(--marka-jasna); }
+/* Na czas dogrywania słownika strona jest niewidoczna, żeby polska
+   treść nie mignęła przed tłumaczeniem; bezpiecznik w landing.js. */
+html.tlumacze body { visibility: hidden; }
+</style>
+<script src="ocena/core/panstwa.js"></script>
+<script src="ocena/core/wersja.js"></script>
+<script src="landing/nazwy.js"></script>
+<script src="landing/akty.js"></script>
+<script src="landing/landing.js"></script>
+<script>LANDING.start();</script>
+</head>
+<body>
+
+<a class="pomin-nawigacje" href="#tresc" data-n="pomin">Skip to content</a>
+
+<header class="gora">
+  <div class="srodek gora-tresc">
+    <a href="https://itoro.com.pl" aria-label="ITORO — home page" data-n-attr="aria-label:logoAria">
+      <img class="logo" src="obrazy/itoro-logo.svg" alt="ITORO">
+    </a>
+    <p class="gora-opis" data-n="goraOpis">We secure networks and protect them against DDoS attacks.</p>
+    <div class="gora-kontakt">
+      <a class="gora-link" href="https://itoro.com.pl">itoro.com.pl</a>
+      <span class="gora-kreska" aria-hidden="true">|</span>
+      <!-- Adres poczty nie występuje w kodzie strony w postaci jawnej —
+           składa go skrypt z dwóch odwróconych fragmentów. Bez JavaScriptu
+           widoczna jest wersja opisowa. -->
+      <span class="poczta" data-a="selas" data-b="lp.moc.oroti"><noscript>kontakt przez itoro.com.pl</noscript></span>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="srodek">
+    <p class="nadtytul" data-n="nadtytul">Free tools</p>
+    <h1 data-n="h1">Regulatory risk assessment for the board</h1>
+
+    <p class="hero-odpowiedzialnosc" data-n="hero">The NIS 2 Directive introduces <strong>personal liability of the management</strong>. The management body approves the risk-management measures, oversees their implementation and can be held liable for infringements (Article 20(1)). The fine for an essential entity reaches EUR&nbsp;10,000,000 or 2&nbsp;% of the total worldwide annual turnover, and the supervisory authority may temporarily prohibit a member of the management from exercising managerial functions (Article 32(5)(b), Article 34(4)).</p>
+  </div>
+</section>
+
+<main class="srodek" id="tresc">
+
+  <div class="pas">
+
+    <article class="karta karta-narzedzie">
+      <h2 data-n="kartaTytul">NIS 2 compliance assessment <span class="tytul-dopisek">— choose your country</span></h2>
+      <p class="wiodacy" data-n="wiodacy">Determines the entity's status (essential or important), the competent supervisory authority, the maximum fines and the deadlines, then guides you through a module-by-module assessment of readiness.</p>
+
+      <div class="plakietki" data-lista-plakietki="plakietki"><span class="plakietka p-ksc">Directive (EU) 2022/2555</span><span class="plakietka p-reg">Regulation (EU) 2024/2690</span><span class="plakietka p-ue">27 EU Member States · 24 languages</span></div>
+
+      <ul class="lista" data-lista="punkty"><li><strong>Management report as soon as the profile is filled in</strong> — entity status, supervisory authority, maximum fines, deadlines and the management's own tasks, before the first question is answered</li><li><strong>Assessment scope tailored to the entity's profile</strong> — the tool skips requirements that do not apply to the entity</li><li><strong>National law as the basis, EU law as the common layer</strong> — every requirement names the provision it stems from, with a link to the text of the act</li><li><strong>All Member States and the 24 official EU languages</strong> — for states without a national-law module the assessment follows Regulation (EU) 2024/2690 and the NIS&nbsp;2 Directive</li><li>Progress saving, snapshots, comparison over time, export to XLSX and JSON</li></ul>
+
+      <div class="wybor">
+        <label class="wybor-pole"><span data-n="wyborPanstwo">Country</span>
+          <select id="wyborPanstwo"><option value="" selected>— choose your country —</option></select></label>
+        <label class="wybor-pole"><span data-n="wyborJezyk">Tool language</span>
+          <select id="wyborJezyk"><option value="en" selected>English</option></select></label>
+      </div>
+      <p class="wybor-stan stan-wybierz" id="wyborStan">Choose the country whose law applies to your entity — see the list below.</p>
+
+      <div class="akcje">
+        <a class="przycisk przycisk-rozciagniety" href="#panstwa-tytul" data-narzedzie=""><span data-n="otworz">Open the tool</span> <span class="strzalka" aria-hidden="true">&rarr;</span></a>
+        <a class="przycisk przycisk-drugi" href="#panstwa-tytul" data-narzedzie="&amp;przyklad=1" data-n="przyklad">See a sample report</a>
+      </div>
+      <p class="czas" data-n="czas">Management report in about 10 minutes. The sample shows a finished report on the data of a fictitious company — with classification, maximum fines and gap analysis.</p>
+
+      <p class="wersja" id="wersjaStrony">Version 1.2.0 · 6 October 2026 · <a href="ocena/zmiany.html">changelog</a></p>
+    </article>
+
+    <div class="kolumna-prawa">
+      <aside class="karta karta-itoro">
+        <p class="nadtytul-firmy" data-n="itoroNad">Tools provided by ITORO</p>
+        <h2 data-n="itoroH2">We improve the security of your network</h2>
+        <p data-n="itoroP1">We deploy and operate DDoS protection systems, mainly in telecommunications networks and data centres.</p>
+        <ul class="lista" data-lista="itoroPunkty"><li><strong>Attack detected in 2–5 seconds</strong>, mitigation at your own network edge</li><li><strong>Business continuity and monitoring</strong> — the areas where compliance assessments most often reveal gaps</li><li><strong>Support in handling incidents</strong> that the Directive requires to be reported within 24 and 72 hours</li></ul>
+        <p data-n="itoroP2">If the assessment reveals gaps in these areas, we can close them.</p>
+        <div class="akcje">
+          <a class="przycisk" href="https://itoro.com.pl" data-n="oferta">See our offer</a>
+        </div>
+      </aside>
+
+      <p class="pod-reklama" data-n="podReklama">The tools were built so that network operators and data centres can prepare for NIS 2 faster and see at once how much work lies ahead. We provide them free of charge and without registration. They run entirely in the browser, and the data entered never leaves the user's device.</p>
+    </div>
+
+  </div>
+
+<!-- panstwa:start -->
+  <section class="panstwa" aria-labelledby="panstwa-tytul">
+    <div class="panstwa-glowa">
+      <h2 id="panstwa-tytul" data-n="panstwaH2">Choose your country</h2>
+      <p data-n="panstwaP">The same tool for the 27 Member States, in the 24 official languages of the Union. For states without a national-law module the assessment follows the common layer — the directly applicable Regulation (EU) 2024/2690 and the obligations arising directly from the NIS&nbsp;2 Directive. The interface language can be changed in the tool independently of the country.</p>
+    </div>
+    <div class="panstwa-siatka">
+      <a class="panstwo-kafel stan-wspolna" href="ocena/index.html?panstwo=AT&amp;jezyk=en" data-panstwo="AT">
+        <span class="panstwo-kod" aria-hidden="true">AT</span>
+        <span class="panstwo-nazwy"><span class="panstwo-nazwa">Austria</span><span class="panstwo-wlasna">Österreich</span></span>
+        <span class="panstwo-akt">NIS-Gesetz 2026 (NISG 2026), BGBl. I Nr. 94/2025</span>
+        <span class="panstwo-stan">common EU layer</span>
+      </a>
+      <a class="panstwo-kafel stan-wspolna" href="ocena/index.html?panstwo=BE&amp;jezyk=en" data-panstwo="BE">
+        <span class="panstwo-kod" aria-hidden="true">BE</span>
+        <span class="panstwo-nazwy"><span class="panstwo-nazwa">Belgium</span><span class="panstwo-wlasna">België · Belgique · Belgien</span></span>
+        <span class="panstwo-akt">Loi du 26 avril 2024 établissant un cadre pour la cybersécurité / Wet van 26 april 2024</span>
+        <span class="panstwo-stan">common EU layer</span>
+      </a>
+      <a class="panstwo-kafel stan-wspolna" href="ocena/index.html?panstwo=BG&amp;jezyk=en" data-panstwo="BG">
+        <span class="panstwo-kod" aria-hidden="true">BG</span>
+        <span class="panstwo-nazwy"><span class="panstwo-nazwa">Bulgaria</span><span class="panstwo-wlasna">България</span></span>
+        <span class="panstwo-akt">Закон за изменение и допълнение на Закона за киберсигурност, ДВ бр. 17/2026</span>
+        <span class="panstwo-stan">common EU layer</span>
+      </a>
+      <a class="panstwo-kafel stan-wspolna" href="ocena/index.html?panstwo=HR&amp;jezyk=en" data-panstwo="HR">
+        <span class="panstwo-kod" aria-hidden="true">HR</span>
+        <span class="panstwo-nazwy"><span class="panstwo-nazwa">Croatia</span><span class="panstwo-wlasna">Hrvatska</span></span>
+        <span class="panstwo-akt">Zakon o kibernetičkoj sigurnosti, NN 14/2024</span>
+        <span class="panstwo-stan">common EU layer</span>
+      </a>
+      <a class="panstwo-kafel stan-wspolna" href="ocena/index.html?panstwo=CY&amp;jezyk=en" data-panstwo="CY">
+        <span class="panstwo-kod" aria-hidden="true">CY</span>
+        <span class="panstwo-nazwy"><span class="panstwo-nazwa">Cyprus</span><span class="panstwo-wlasna">Κύπρος</span></span>
+        <span class="panstwo-akt">Ο περί Ασφάλειας Δικτύων και Συστημάτων Πληροφοριών Νόμος, Ν. 60(Ι)/2025</span>
+        <span class="panstwo-stan">common EU layer</span>
+      </a>
+      <a class="panstwo-kafel stan-wspolna" href="ocena/index.html?panstwo=CZ&amp;jezyk=en" data-panstwo="CZ">
+        <span class="panstwo-kod" aria-hidden="true">CZ</span>
+        <span class="panstwo-nazwy"><span class="panstwo-nazwa">Czechia</span><span class="panstwo-wlasna">Česko</span></span>
+        <span class="panstwo-akt">Zákon č. 264/2025 Sb., o kybernetické bezpečnosti</span>
+        <span class="panstwo-stan">common EU layer</span>
+      </a>
+      <a class="panstwo-kafel stan-wspolna" href="ocena/index.html?panstwo=DK&amp;jezyk=en" data-panstwo="DK">
+        <span class="panstwo-kod" aria-hidden="true">DK</span>
+        <span class="panstwo-nazwy"><span class="panstwo-nazwa">Denmark</span><span class="panstwo-wlasna">Danmark</span></span>
+        <span class="panstwo-akt">Lov nr. 434 af 6. maj 2025 om foranstaltninger til sikring af et højt cybersikkerhedsniveau</span>
+        <span class="panstwo-stan">common EU layer</span>
+      </a>
+      <a class="panstwo-kafel stan-wspolna" href="ocena/index.html?panstwo=EE&amp;jezyk=en" data-panstwo="EE">
+        <span class="panstwo-kod" aria-hidden="true">EE</span>
+        <span class="panstwo-nazwy"><span class="panstwo-nazwa">Estonia</span><span class="panstwo-wlasna">Eesti</span></span>
+        <span class="panstwo-akt">Küberturvalisuse seadus (KüTS)</span>
+        <span class="panstwo-stan">common EU layer</span>
+      </a>
+      <a class="panstwo-kafel stan-wspolna" href="ocena/index.html?panstwo=FI&amp;jezyk=en" data-panstwo="FI">
+        <span class="panstwo-kod" aria-hidden="true">FI</span>
+        <span class="panstwo-nazwy"><span class="panstwo-nazwa">Finland</span><span class="panstwo-wlasna">Suomi · Finland</span></span>
+        <span class="panstwo-akt">Kyberturvallisuuslaki 124/2025</span>
+        <span class="panstwo-stan">common EU layer</span>
+      </a>
+      <a class="panstwo-kafel stan-brak" href="ocena/index.html?panstwo=FR&amp;jezyk=en" data-panstwo="FR">
+        <span class="panstwo-kod" aria-hidden="true">FR</span>
+        <span class="panstwo-nazwy"><span class="panstwo-nazwa">France</span><span class="panstwo-wlasna">France</span></span>
+        <span class="panstwo-stan">no national act</span>
+      </a>
+      <a class="panstwo-kafel stan-wspolna" href="ocena/index.html?panstwo=DE&amp;jezyk=en" data-panstwo="DE">
+        <span class="panstwo-kod" aria-hidden="true">DE</span>
+        <span class="panstwo-nazwy"><span class="panstwo-nazwa">Germany</span><span class="panstwo-wlasna">Deutschland</span></span>
+        <span class="panstwo-akt">BSI-Gesetz in der Fassung des NIS2UmsuCG (BGBl. 2025 I Nr. 301)</span>
+        <span class="panstwo-stan">common EU layer</span>
+      </a>
+      <a class="panstwo-kafel stan-wspolna" href="ocena/index.html?panstwo=GR&amp;jezyk=en" data-panstwo="GR">
+        <span class="panstwo-kod" aria-hidden="true">GR</span>
+        <span class="panstwo-nazwy"><span class="panstwo-nazwa">Greece</span><span class="panstwo-wlasna">Ελλάδα</span></span>
+        <span class="panstwo-akt">Νόμος 5160/2024 (ΦΕΚ Α΄ 195) και νόμος 5305/2026 (ΦΕΚ Α΄ 85)</span>
+        <span class="panstwo-stan">common EU layer</span>
+      </a>
+      <a class="panstwo-kafel stan-wspolna" href="ocena/index.html?panstwo=HU&amp;jezyk=en" data-panstwo="HU">
+        <span class="panstwo-kod" aria-hidden="true">HU</span>
+        <span class="panstwo-nazwy"><span class="panstwo-nazwa">Hungary</span><span class="panstwo-wlasna">Magyarország</span></span>
+        <span class="panstwo-akt">2024. évi LXIX. törvény Magyarország kiberbiztonságáról</span>
+        <span class="panstwo-stan">common EU layer</span>
+      </a>
+      <a class="panstwo-kafel stan-brak" href="ocena/index.html?panstwo=IE&amp;jezyk=en" data-panstwo="IE">
+        <span class="panstwo-kod" aria-hidden="true">IE</span>
+        <span class="panstwo-nazwy"><span class="panstwo-nazwa">Ireland</span><span class="panstwo-wlasna">Éire · Ireland</span></span>
+        <span class="panstwo-stan">no national act</span>
+      </a>
+      <a class="panstwo-kafel stan-wspolna" href="ocena/index.html?panstwo=IT&amp;jezyk=en" data-panstwo="IT">
+        <span class="panstwo-kod" aria-hidden="true">IT</span>
+        <span class="panstwo-nazwy"><span class="panstwo-nazwa">Italy</span><span class="panstwo-wlasna">Italia</span></span>
+        <span class="panstwo-akt">Decreto legislativo 4 settembre 2024, n. 138</span>
+        <span class="panstwo-stan">common EU layer</span>
+      </a>
+      <a class="panstwo-kafel stan-wspolna" href="ocena/index.html?panstwo=LV&amp;jezyk=en" data-panstwo="LV">
+        <span class="panstwo-kod" aria-hidden="true">LV</span>
+        <span class="panstwo-nazwy"><span class="panstwo-nazwa">Latvia</span><span class="panstwo-wlasna">Latvija</span></span>
+        <span class="panstwo-akt">Nacionālās kiberdrošības likums</span>
+        <span class="panstwo-stan">common EU layer</span>
+      </a>
+      <a class="panstwo-kafel stan-wspolna" href="ocena/index.html?panstwo=LT&amp;jezyk=en" data-panstwo="LT">
+        <span class="panstwo-kod" aria-hidden="true">LT</span>
+        <span class="panstwo-nazwy"><span class="panstwo-nazwa">Lithuania</span><span class="panstwo-wlasna">Lietuva</span></span>
+        <span class="panstwo-akt">Lietuvos Respublikos kibernetinio saugumo įstatymas (nauja redakcija, Nr. XIV-2902)</span>
+        <span class="panstwo-stan">common EU layer</span>
+      </a>
+      <a class="panstwo-kafel stan-wspolna" href="ocena/index.html?panstwo=LU&amp;jezyk=en" data-panstwo="LU">
+        <span class="panstwo-kod" aria-hidden="true">LU</span>
+        <span class="panstwo-nazwy"><span class="panstwo-nazwa">Luxembourg</span><span class="panstwo-wlasna">Luxembourg · Luxemburg</span></span>
+        <span class="panstwo-akt">Loi du 5 mai 2026, Mémorial A 225</span>
+        <span class="panstwo-stan">common EU layer</span>
+      </a>
+      <a class="panstwo-kafel stan-wspolna" href="ocena/index.html?panstwo=MT&amp;jezyk=en" data-panstwo="MT">
+        <span class="panstwo-kod" aria-hidden="true">MT</span>
+        <span class="panstwo-nazwy"><span class="panstwo-nazwa">Malta</span><span class="panstwo-wlasna">Malta</span></span>
+        <span class="panstwo-akt">Subsidiary Legislation 460.41 — Measures for a High Common Level of Cybersecurity</span>
+        <span class="panstwo-stan">common EU layer</span>
+      </a>
+      <a class="panstwo-kafel stan-wspolna" href="ocena/index.html?panstwo=NL&amp;jezyk=en" data-panstwo="NL">
+        <span class="panstwo-kod" aria-hidden="true">NL</span>
+        <span class="panstwo-nazwy"><span class="panstwo-nazwa">Netherlands</span><span class="panstwo-wlasna">Nederland</span></span>
+        <span class="panstwo-akt">Cyberbeveiligingswet, Stb. 2026, 187</span>
+        <span class="panstwo-stan">common EU layer</span>
+      </a>
+      <a class="panstwo-kafel stan-gotowy" href="ocena/index.html?panstwo=PL&amp;jezyk=en" data-panstwo="PL">
+        <span class="panstwo-kod" aria-hidden="true">PL</span>
+        <span class="panstwo-nazwy"><span class="panstwo-nazwa">Poland</span><span class="panstwo-wlasna">Polska</span></span>
+        <span class="panstwo-akt">Ustawa o krajowym systemie cyberbezpieczeństwa (tekst jednolity), Dz.U. 2026 poz. 20</span>
+        <span class="panstwo-stan">national law + common EU layer</span>
+      </a>
+      <a class="panstwo-kafel stan-wspolna" href="ocena/index.html?panstwo=PT&amp;jezyk=en" data-panstwo="PT">
+        <span class="panstwo-kod" aria-hidden="true">PT</span>
+        <span class="panstwo-nazwy"><span class="panstwo-nazwa">Portugal</span><span class="panstwo-wlasna">Portugal</span></span>
+        <span class="panstwo-akt">Decreto-Lei n.º 125/2025 — Regime Jurídico da Segurança do Ciberespaço</span>
+        <span class="panstwo-stan">common EU layer</span>
+      </a>
+      <a class="panstwo-kafel stan-wspolna" href="ocena/index.html?panstwo=RO&amp;jezyk=en" data-panstwo="RO">
+        <span class="panstwo-kod" aria-hidden="true">RO</span>
+        <span class="panstwo-nazwy"><span class="panstwo-nazwa">Romania</span><span class="panstwo-wlasna">România</span></span>
+        <span class="panstwo-akt">OUG nr. 155/2024, aprobată cu modificări prin Legea nr. 124/2025</span>
+        <span class="panstwo-stan">common EU layer</span>
+      </a>
+      <a class="panstwo-kafel stan-wspolna" href="ocena/index.html?panstwo=SK&amp;jezyk=en" data-panstwo="SK">
+        <span class="panstwo-kod" aria-hidden="true">SK</span>
+        <span class="panstwo-nazwy"><span class="panstwo-nazwa">Slovakia</span><span class="panstwo-wlasna">Slovensko</span></span>
+        <span class="panstwo-akt">Zákon č. 69/2018 Z. z. v znení zákona č. 366/2024 Z. z.</span>
+        <span class="panstwo-stan">common EU layer</span>
+      </a>
+      <a class="panstwo-kafel stan-wspolna" href="ocena/index.html?panstwo=SI&amp;jezyk=en" data-panstwo="SI">
+        <span class="panstwo-kod" aria-hidden="true">SI</span>
+        <span class="panstwo-nazwy"><span class="panstwo-nazwa">Slovenia</span><span class="panstwo-wlasna">Slovenija</span></span>
+        <span class="panstwo-akt">Zakon o informacijski varnosti (ZInfV-1), Uradni list RS 40/25</span>
+        <span class="panstwo-stan">common EU layer</span>
+      </a>
+      <a class="panstwo-kafel stan-brak" href="ocena/index.html?panstwo=ES&amp;jezyk=en" data-panstwo="ES">
+        <span class="panstwo-kod" aria-hidden="true">ES</span>
+        <span class="panstwo-nazwy"><span class="panstwo-nazwa">Spain</span><span class="panstwo-wlasna">España</span></span>
+        <span class="panstwo-stan">no national act</span>
+      </a>
+      <a class="panstwo-kafel stan-wspolna" href="ocena/index.html?panstwo=SE&amp;jezyk=en" data-panstwo="SE">
+        <span class="panstwo-kod" aria-hidden="true">SE</span>
+        <span class="panstwo-nazwy"><span class="panstwo-nazwa">Sweden</span><span class="panstwo-wlasna">Sverige</span></span>
+        <span class="panstwo-akt">Cybersäkerhetslag (2025:1506)</span>
+        <span class="panstwo-stan">common EU layer</span>
+      </a>
+    </div>
+  </section>
+<!-- panstwa:end -->
+
+  <section class="fakty" data-lista="fakty"><div class="fakt"><h3>Data stays on the device</h3><p>Answers, evidence and financial data are stored in the browser and in files exported by the user.</p></div><div class="fakt"><h3>Works without a network connection</h3><p>Once the page has loaded, the tool works locally. The Online / Offline switch also suspends queries to public registers.</p></div><div class="fakt"><h3>Legal basis at every question</h3><p>Every question names the provision it stems from, and the link opens the act at the right page.</p></div></section>
+
+</main>
+
+<script>
+/* Adresy poczty zbierane ze stron to najprostszy łup dla robotów
+   spamowych, dlatego w kodzie nie ma go w całości: są dwa odwrócone
+   fragmenty, które łączy dopiero przeglądarka. Zatrzymuje to zbieracze
+   czytające sam kod strony — nie zatrzyma kogoś, kto uruchomi
+   przeglądarkę, ale takich jest nieporównanie mniej. */
+(function () {
+    var pole = document.querySelector('.poczta');
+    if (!pole) return;
+    var odwroc = function (t) { return t.split('').reverse().join(''); };
+    var adres = odwroc(pole.dataset.a) + String.fromCharCode(64) + odwroc(pole.dataset.b);
+    var link = document.createElement('a');
+    link.className = 'gora-link poczta';
+    link.href = String.fromCharCode(109, 97, 105, 108, 116, 111, 58) + adres;
+    link.textContent = adres;
+    link.rel = 'nofollow';
+    pole.replaceWith(link);
+})();
+</script>
+
+</body>
+</html>
