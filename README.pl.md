@@ -64,6 +64,9 @@ z przepisów, nie z kwestionariusza.
 
 ## Uruchomienie
 
+**[Pobierz najnowsze wydanie (ZIP)](https://github.com/itoro-pl/nis2-compliance-assessment/releases/latest)**
+— rozpakuj i otwórz `index.html`.
+
 **Serwer nie jest potrzebny.** Otwarcie pliku `index.html` w przeglądarce
 uruchamia całość: wybór państwa, przejście do narzędzia, 24 języki,
 ocenę, eksport do JSON i XLSX oraz wydruk raportu. Biblioteki są dołączone

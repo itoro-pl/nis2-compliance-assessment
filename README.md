@@ -65,6 +65,9 @@ fine follow from the law, not from the questionnaire.
 
 ## Running the tool
 
+**[Download the latest release (ZIP)](https://github.com/itoro-pl/nis2-compliance-assessment/releases/latest)**
+— unpack it and open `index.html`.
+
 **No server is required.** Opening `index.html` in a browser starts the
 whole thing: country selection, the step into the tool, all 24 languages,
 the assessment, export to JSON and XLSX, and printing the report. The
