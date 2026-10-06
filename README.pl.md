@@ -44,6 +44,7 @@ przed atakami DDoS u operatorów telekomunikacyjnych i w centrach danych.
 - [Rozszerzenie na kolejne państwo](#rozszerzenie-na-kolejne-pa%C5%84stwo)
 - [Najczęstsze pytania](#najcz%C4%99stsze-pytania)
 - [Licencja](#licencja)
+- [O ITORO](#o-itoro)
 
 ## Co daje ocena
 
@@ -363,7 +364,16 @@ w `ocena/vendor/` mają własny status prawny — patrz `NOTICE`.
 
 ---
 
-**Wersja 1.2.0 z 2026-10-06.** Lista zmian: `ocena/zmiany.html`.
+## O ITORO
 
+[ITORO](https://itoro.com.pl) zajmuje się ochroną sieci przed atakami DDoS
+u operatorów telekomunikacyjnych, dostawców internetu i w centrach danych:
+wdrażamy i utrzymujemy systemy wykrywania i mitygacji na brzegu sieci
+(WanGuard, RTBH, BGP FlowSpec). To narzędzie powstało jako pomoc dla naszego
+sektora w przygotowaniu do NIS 2 — udostępniamy je bezpłatnie.
+
+---
+
+**Wersja 1.2.0 z 2026-10-06.** Lista zmian: `ocena/zmiany.html`.
 Błędy i propozycje zmian prosimy zgłaszać przez issues i pull requesty w tym
-repozytorium. Narzędzie rozwija [ITORO](https://itoro.com.pl).
+repozytorium.

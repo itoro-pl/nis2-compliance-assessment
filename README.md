@@ -45,6 +45,7 @@ against DDoS attacks.
 - [Extending the tool to another country](#extending-the-tool-to-another-country)
 - [Frequently asked questions](#frequently-asked-questions)
 - [Licence](#licence)
+- [About ITORO](#about-itoro)
 
 ## What the assessment delivers
 
@@ -360,7 +361,15 @@ The texts of legal acts in `ustawy/` and `ocena/ustawy/` and the libraries in
 
 ---
 
-**Version 1.2.0 of 2026-10-06.** Changelog: `ocena/zmiany.html`.
+## About ITORO
 
+[ITORO](https://itoro.com.pl) protects telecom operator, ISP and data centre
+networks against DDoS attacks: we deploy and maintain detection and mitigation
+at the network edge (WanGuard, RTBH, BGP FlowSpec). We built this tool to help
+our sector prepare for NIS 2 and make it available free of charge.
+
+---
+
+**Version 1.2.0 of 2026-10-06.** Changelog: `ocena/zmiany.html`.
 Please report defects and propose changes through issues and pull requests in
-this repository. The tool is developed by [ITORO](https://itoro.com.pl).
+this repository.
